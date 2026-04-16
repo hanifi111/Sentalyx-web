@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SENTRALYX - Profesyonel Kripto Para Trading Terminali</title>
     
-    <!-- Bootstrap CSS -->
+    <title>SENTRALYX - Profesyonel Algoritmik Trading Terminali</title>
+    <meta name="description" content="Kripto para piyasaları için gelişmiş scanner, çoklu strateji motoru ve detaylı raporlama sunan profesyonel trading çözümü.">
+    <meta name="keywords" content="trading, kripto, scanner, sentralyx, algoritmik trading, borsa, bitcoin">
+    
+    <link rel="icon" type="image/svg+xml" href="sentralyx_logo_master.svg">
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <style>
         :root {
@@ -22,951 +23,178 @@
             --text-secondary: #8b92a8;
             --border-color: #2a3142;
             --card-bg: #1a1f2e;
-            --hover-bg: #232937;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: var(--primary-dark);
             color: var(--text-primary);
-            min-height: 100vh;
-            overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        /* Navigation */
+        /* Navbar Customization */
         .navbar {
-            background: rgba(15, 20, 25, 0.95) !important;
+            background: rgba(15, 20, 25, 0.95);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border-color);
-            padding: 1rem 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
+            padding: 0.8rem 0;
         }
-
-        .navbar-brand {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--accent-green) !important;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .navbar-brand i {
-            font-size: 2rem;
-        }
-
-        .nav-link {
-            color: var(--text-secondary) !important;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            margin: 0 15px;
-            position: relative;
-        }
-
-        .nav-link:hover {
-            color: var(--accent-green) !important;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-green);
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
+        .navbar-brand img {
+            height: 40px;
+            margin-right: 10px;
         }
 
         /* Hero Section */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: radial-gradient(circle at 20% 50%, rgba(47, 177, 127, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
-            padding-top: 80px;
-        }
-
-        .hero-content {
+            padding: 140px 0 80px;
+            background: radial-gradient(circle at top right, rgba(47, 177, 127, 0.15), transparent);
             text-align: center;
-            max-width: 1200px;
-            padding: 0 20px;
         }
-
         .hero h1 {
-            font-size: 4rem;
+            font-size: 3.5rem;
             font-weight: 800;
-            margin-bottom: 1.5rem;
             background: linear-gradient(45deg, var(--accent-green), var(--accent-blue));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: glow 2s ease-in-out infinite alternate;
+            margin-bottom: 20px;
         }
 
-        @keyframes glow {
-            from { filter: drop-shadow(0 0 20px rgba(47, 177, 127, 0.5)); }
-            to { filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.5)); }
+        /* Screenshot Styling */
+        .terminal-img {
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease;
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 30px;
+        }
+        .terminal-img:hover {
+            transform: scale(1.02);
+            border-color: var(--accent-green);
         }
 
-        .hero p {
-            font-size: 1.3rem;
-            color: var(--text-secondary);
-            margin-bottom: 2.5rem;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .btn-custom {
-            background: linear-gradient(45deg, var(--accent-green), var(--accent-blue));
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            margin: 10px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-custom:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(47, 177, 127, 0.3);
-            color: white;
-        }
-
-        .btn-outline-custom {
-            background: transparent;
-            color: var(--accent-green);
-            border: 2px solid var(--accent-green);
-            padding: 15px 40px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            margin: 10px;
-        }
-
-        .btn-outline-custom:hover {
-            background: var(--accent-green);
-            color: white;
-            transform: translateY(-3px);
-        }
-
-        /* Section Styles */
-        .section {
-            padding: 100px 0;
-            position: relative;
-        }
-
-        .section-title {
-            font-size: 3rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-
-        .section-subtitle {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 4rem auto;
-        }
-
-        /* Feature Cards */
+        /* Sections */
+        .section-padding { padding: 80px 0; }
         .feature-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 15px;
-            padding: 2rem;
+            padding: 30px;
             height: 100%;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
         }
+        .feature-icon { color: var(--accent-green); font-size: 2.5rem; margin-bottom: 20px; }
 
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent-green), var(--accent-blue));
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent-green);
-            box-shadow: 0 20px 40px rgba(47, 177, 127, 0.2);
-        }
-
-        .feature-icon {
-            font-size: 3rem;
-            color: var(--accent-green);
-            margin-bottom: 1.5rem;
-        }
-
-        .feature-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-
-        .feature-description {
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        /* Scanner Section */
-        .scanner-demo {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 15px;
-            padding: 2rem;
-            margin-top: 3rem;
-        }
-
-        .scanner-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .scanner-controls {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .control-btn {
-            background: var(--hover-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-
-        .control-btn:hover {
-            background: var(--accent-green);
-            border-color: var(--accent-green);
-            transform: translateY(-2px);
-        }
-
-        .scanner-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .scanner-table th {
-            background: var(--hover-bg);
-            color: var(--accent-green);
-            padding: 12px;
-            text-align: left;
-            font-weight: 600;
-            border-bottom: 2px solid var(--accent-green);
-        }
-
-        .scanner-table td {
-            padding: 12px;
-            border-bottom: 1px solid var(--border-color);
-            color: var(--text-secondary);
-        }
-
-        .signal-buy {
-            color: #00ff88;
-            font-weight: 600;
-        }
-
-        .signal-sell {
-            color: #ff4444;
-            font-weight: 600;
-        }
-
-        .signal-none {
-            color: var(--text-secondary);
-        }
-
-        /* Reports Section */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .stat-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 15px;
-            padding: 2rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent-green), var(--accent-blue));
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--accent-green);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 1rem;
-        }
-
-        .chart-container {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 15px;
-            padding: 2rem;
-            margin-top: 2rem;
-            height: 400px;
-        }
-
-        /* Strategy Section */
-        .strategy-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .strategy-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 15px;
-            padding: 2rem;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .strategy-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-green);
-        }
-
-        .strategy-type {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--accent-green);
-            margin-bottom: 1rem;
-        }
-
-        .strategy-description {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .strategy-features {
-            list-style: none;
-        }
-
-        .strategy-features li {
-            color: var(--text-secondary);
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-        }
-
-        .strategy-features li::before {
-            content: '>';
-            color: var(--accent-green);
-            font-weight: bold;
-            margin-right: 10px;
-        }
-
-        /* Other Tabs Section */
-        .tabs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .tab-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 15px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .tab-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-green);
-        }
-
-        .tab-icon {
-            font-size: 2.5rem;
-            color: var(--accent-green);
-            margin-bottom: 1rem;
-        }
-
-        .tab-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-        }
-
-        .tab-description {
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        /* Footer */
         .footer {
-            background: var(--primary-dark);
             border-top: 1px solid var(--border-color);
-            padding: 3rem 0;
+            padding: 40px 0;
+            color: var(--text-secondary);
             text-align: center;
         }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent-green);
-        }
-
-        .footer-text {
-            color: var(--text-secondary);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1.1rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .navbar-brand {
-                font-size: 1.5rem;
-            }
-
-            .nav-link {
-                margin: 0 10px;
-                font-size: 0.9rem;
-            }
-        }
-
-        /* Animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
+        
+        /* Smooth Scroll */
+        html { scroll-behavior: smooth; }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg">
+
+    <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container">
-            <a class="navbar-brand" href="#home">
-                <i class="fas fa-chart-line"></i>
-                SENTRALYX
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="sentralyx_logo_master.svg" alt="Sentralyx Logo">
+                <span class="fw-bold text-white">SENTRALYX</span>
             </a>
-            <div class="navbar-nav ms-auto">
-                <a class="nav-link" href="#scanner">Scanner</a>
-                <a class="nav-link" href="#reports">Raporlar</a>
-                <a class="nav-link" href="#strategy">Strateji</a>
-                <a class="nav-link" href="#features">Özellikler</a>
-                <a class="nav-link" href="#contact">iletişim</a>
+            <div class="navbar-nav ms-auto d-none d-lg-flex">
+                <a class="nav-link text-white px-3" href="#scanner">Scanner</a>
+                <a class="nav-link text-white px-3" href="#reports">Raporlar</a>
+                <a class="nav-link text-white px-3" href="#features">Özellikler</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content fade-in">
-            <h1>SENTRALYX</h1>
-            <p>Profesyonel kripto para trading terminali. Otomatik stratejiler, gerçek zamanli analiz ve kapsamli risk yönetimi ile trading deneyiminizi zirveye taşiyin.</p>
-            <div>
-                <a href="#scanner" class="btn-custom">Keşfet</a>
-                <a href="#contact" class="btn-outline-custom">Demo Talebi</a>
+    <header class="hero">
+        <div class="container">
+            <h1 class="display-3">Trading Süreçlerinizi Otomatize Edin</h1>
+            <p class="lead text-secondary mb-5">Sentralyx ile piyasa verilerini saniyeler içinde analiz edin, stratejinizi belirleyin ve verimliliği artırın.</p>
+            <img src="scanner.png" alt="Sentralyx Scanner" class="terminal-img">
+        </div>
+    </header>
+
+    <section id="scanner" class="section-padding">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5">
+                    <h2 class="mb-4">Akıllı Market Scanner</h2>
+                    <p class="text-secondary">Piyasadaki yüzlerce pariteyi aynı anda, belirlediğiniz teknik kriterlere göre tarayın. MTF (Çoklu Zaman Dilimi) onayı ile sinyal kalitesini en üst seviyeye taşıyın.</p>
+                    <ul class="list-unstyled text-secondary">
+                        <li><i class="fas fa-check text-success me-2"></i> Anlık RSI, MACD ve SMI Filtreleri</li>
+                        <li><i class="fas fa-check text-success me-2"></i> Özelleştirilebilir Zaman Dilimleri</li>
+                        <li><i class="fas fa-check text-success me-2"></i> Hızlı Sinyal Üretimi</li>
+                    </ul>
+                </div>
+                <div class="col-lg-7">
+                    <img src="scanner.png" alt="Scanner Ekranı" class="terminal-img">
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Scanner Section -->
-    <section id="scanner" class="section">
+    <section id="reports" class="section-padding bg-dark bg-opacity-25">
         <div class="container">
-            <h2 class="section-title fade-in">Akıllı Market Scanner</h2>
-            <p class="section-subtitle fade-in">Gerçek zamanli piyasa analizi, çoklu zaman dilimi desteği ve özelleştirilebilir stratejilerle fırsatları yakalayın.</p>
-            
-            <div class="row fade-in">
-                <div class="col-lg-4 mb-4">
+            <div class="row align-items-center flex-row-reverse">
+                <div class="col-lg-5">
+                    <h2 class="mb-4">Şeffaf Performans Takibi</h2>
+                    <p class="text-secondary">Tüm işlemlerinizi detaylı olarak raporlayın. Başarı oranınızı, kâr/zarar grafiklerinizi ve strateji performansınızı tek ekrandan izleyin.</p>
+                </div>
+                <div class="col-lg-7">
+                    <img src="reports.png" alt="Raporlama Ekranı" class="terminal-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="section-padding">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2>Kapsamlı Modüller</h2>
+                <p class="text-secondary">Bir trader'ın ihtiyacı olan tüm araçlar tek bir terminalde toplandı.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
                     <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-search"></i>
-                        </div>
-                        <h3 class="feature-title">Çoklu Zaman Dilimi</h3>
-                        <p class="feature-description">1 dakikadan güne kadar geniş zaman aralığında piyasa analizi yapın. MTF onayı ile sinyal kalitesini artırın.</p>
+                        <i class="fas fa-layer-group feature-icon"></i>
+                        <h4>Strateji Yönetimi</h4>
+                        <img src="strategy.png" alt="Strateji" class="img-fluid rounded border border-secondary my-3">
+                        <p class="text-secondary small">Majority, Scoring ve Full Consensus yöntemleriyle kendi karar mekanizmanızı kurun.</p>
                     </div>
                 </div>
-                <div class="col-lg-4 mb-4">
+                <div class="col-md-4">
                     <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-bolt"></i>
-                        </div>
-                        <h3 class="feature-title">Hızlı Tarama</h3>
-                        <p class="feature-description">Saniyeler içinde yüzlerce kripto para birimini analiz edin. Anlık sinyal üretimi ve sebep açıklamaları.</p>
-                    </3>
+                        <i class="fas fa-chart-bar feature-icon"></i>
+                        <h4>Aktif Pozisyonlar</h4>
+                        <img src="open_position.png" alt="Açık Pozisyonlar" class="img-fluid rounded border border-secondary my-3">
+                        <p class="text-secondary small">Tüm açık işlemlerinizi anlık PnL verileriyle takip edin ve yönetin.</p>
+                    </div>
                 </div>
-                <div class="col-lg-4 mb-4">
+                <div class="col-md-4">
                     <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-filter"></i>
-                        </div>
-                        <h3 class="feature-title">Akıllı Filtreler</h3>
-                        <p class="feature-description">Trend gücü, volatilite ve piyasa rejimi filtreleri ile sağlam sinyaller elde edin. Karişıklığı azaltın.</p>
+                        <i class="fas fa-sliders-h feature-icon"></i>
+                        <h4>İndikatör Ayarları</h4>
+                        <img src="indikator_settings.png" alt="Ayarlar" class="img-fluid rounded border border-secondary my-3">
+                        <p class="text-secondary small">Kullandığınız indikatörlerin parametrelerini stratejinize göre optimize edin.</p>
                     </div>
-                </div>
-            </div>
-
-            <div class="scanner-demo fade-in">
-                <div class="scanner-header">
-                    <h4 style="color: var(--accent-green);">Scanner Demo</h4>
-                    <div class="scanner-controls">
-                        <button class="control-btn">Başlat</button>
-                        <button class="control-btn">Duraklat</button>
-                        <button class="control-btn">Yenile</button>
-                    </div>
-                </div>
-                <div class="table-responsive">
-                    <table class="scanner-table">
-                        <thead>
-                            <tr>
-                                <th>Sembol</th>
-                                <th>Fiyat</th>
-                                <th>Sinyal</th>
-                                <th>Sebep</th>
-                                <th>Zaman</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>BTC/USDT</td>
-                                <td>67,234.56</td>
-                                <td class="signal-buy">BUY</td>
-                                <td>RSI aşağı, MACD yukarı</td>
-                                <td>12:34:56</td>
-                            </tr>
-                            <tr>
-                                <td>ETH/USDT</td>
-                                <td>3,456.78</td>
-                                <td class="signal-none">NONE</td>
-                                <td>Trend filtresi engelledi</td>
-                                <td>12:34:57</td>
-                            </tr>
-                            <tr>
-                                <td>SOL/USDT</td>
-                                <td>145.67</td>
-                                <td class="signal-sell">SELL</td>
-                                <td>Üst zaman dilimi aşağı</td>
-                                <td>12:34:58</td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Reports Section -->
-    <section id="reports" class="section">
+    <footer class="footer">
         <div class="container">
-            <h2 class="section-title fade-in">Detaylı Raporlama</h2>
-            <p class="section-subtitle fade-in">Kapsamlı performans analizi, profit/loss takibi ve strateji optimizasyonu ile trading başarınınızı ölçün.</p>
-            
-            <div class="stats-grid fade-in">
-                <div class="stat-card">
-                    <div class="stat-number">87.3%</div>
-                    <div class="stat-label">Başarı Oranı</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">$45,678</div>
-                    <div class="stat-label">Toplam Kâr</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">1,234</div>
-                    <div class="stat-label">İşlem Sayısı</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">2.4x</div>
-                    <div class="stat-label">Risk/Ödül Oranı</div>
-                </div>
-            </div>
-
-            <div class="row fade-in">
-                <div class="col-lg-6">
-                    <div class="chart-container">
-                        <canvas id="performanceChart"></canvas>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="chart-container">
-                        <canvas id="profitChart"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Strategy Section -->
-    <section id="strategy" class="section">
-        <div class="container">
-            <h2 class="section-title fade-in">Gelişmiş Stratejiler</h2>
-            <p class="section-subtitle fade-in">Çoklu strateji motoru, piyasa rejimi adaptasyonu ve özelleştirilebilir parametreler ile trading stratejinizi optimize edin.</p>
-            
-            <div class="strategy-grid fade-in">
-                <div class="strategy-card">
-                    <div class="strategy-type">Scoring</div>
-                    <p class="strategy-description">Ağırlıklı sinyal agregasyonu. Her indikatörün skoruna göre toplam skor hesaplar.</p>
-                    <ul class="strategy-features">
-                        <li>Esnek ağırlıklandırma</li>
-                        <li>Eşik değerine dayalı sinyal</li>
-                        <li>Adaptif parametreler</li>
-                    </ul>
-                </div>
-                <div class="strategy-card">
-                    <div class="strategy-type">Majority</div>
-                    <p class="strategy-description">Oylama tabanlı karar verme. Çoğluk oyunu ile sinyal üretir.</p>
-                    <ul class="strategy-features">
-                        <li>Basit çoğluk oylaması</li>
-                        <li>Beraberlik çözümü</li>
-                        <li>Konsensüs gereksinimi</li>
-                    </ul>
-                </div>
-                <div class="strategy-card">
-                    <div class="strategy-type">Strong Majority</div>
-                    <p class="strategy-description">Gelişmiş konsensüs gereksinimi. Sadece güçlü sinyaller üretir.</p>
-                    <ul class="strategy-features">
-                        <li>Yüksek eşik gereksinimi</li>
-                        <li>Kalite filtrelemesi</li>
-                        <li>Risk yönetimi</li>
-                    </ul>
-                </div>
-                <div class="strategy-card">
-                    <div class="strategy-type">Full Consensus</div>
-                    <p class="strategy-description">Tam oy birliği. Tüm indikatörlerin uyum gerektirir.</p>
-                    <ul class="strategy-features">
-                        <li>En yüksek kalite</li>
-                        <li>Minimum filtreleme</li>
-                        <li>Muhafazakar yaklaşım</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Other Tabs Section -->
-    <section id="features" class="section">
-        <div class="container">
-            <h2 class="section-title fade-in">Diğer Özellikler</h2>
-            <p class="section-subtitle fade-in">Açık pozisyon yönetimi, kapalı pozisyon analizi, ayarlar ve indikatörler ile kapsamlı trading deneyimi.</p>
-            
-            <div class="tabs-grid fade-in">
-                <div class="tab-card">
-                    <div class="tab-icon">
-                        <i class="fas fa-chart-area"></i>
-                    </div>
-                    <h3 class="tab-title">Açık Pozisyonlar</h3>
-                    <p class="tab-description">Gerçek zamanlı pozisyon takibi, anlık P&L, manuel SL/TP ayarları ve kısmi kapama özellikleri.</p>
-                </div>
-                <div class="tab-card">
-                    <div class="tab-icon">
-                        <i class="fas fa-history"></i>
-                    </div>
-                    <h3 class="tab-title">Kapalı Pozisyonlar</h3>
-                    <p class="tab-description">Geçmiş işlem analizi, performans metrikleri, filtreleme ve CSV aktarım özellikleri.</p>
-                </div>
-                <div class="tab-card">
-                    <div class="tab-icon">
-                        <i class="fas fa-cog"></i>
-                    </div>
-                    <h3 class="tab-title">Ayarlar</h3>
-                    <p class="tab-description">API bağlantıları, risk yönetimi, tarama ayarları ve raporlama konfigürasyonu.</p>
-                </div>
-                <div class="tab-card">
-                    <div class="tab-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3 class="tab-title">İndikatörler</h3>
-                    <p class="tab-description">Teknik indikatörler, kural oluşturucu, test araçları ve strateji sihirbazı.</p>
-                </div>
-                <div class="tab-card">
-                    <div class="tab-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3 class="tab-title">Risk Yönetimi</h3>
-                    <p class="tab-description">Stop loss, take profit, kısmi çıkış, sermaye yönetimi ve günlük limitler.</p>
-                </div>
-                <div class="tab-card">
-                    <div class="tab-icon">
-                        <i class="fas fa-exchange-alt"></i>
-                    </div>
-                    <h3 class="tab-title">Borsa Entegrasyonu</h3>
-                    <p class="tab-description">Binance ve OKX API entegrasyonu, çoklu hesap desteği ve gerçek zamanlı veri.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="contact" class="footer">
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="#home">Anasayfa</a>
-                <a href="#scanner">Scanner</a>
-                <a href="#reports">Raporlar</a>
-                <a href="#strategy">Strateji</a>
-                <a href="#features">Özellikler</a>
-                <a href="#contact">İletişim</a>
-            </div>
-            <p class="footer-text">
-                © 2024 SENTRALYX. Tüm hakları saklıdır. | Profesyonel Kripto Para Trading Terminali
-            </p>
+            <p>&copy; 2026 SENTRALYX - Profesyonel Trading Çözümleri</p>
+            <div class="small text-secondary">Yazılım Geliştirici: Sentralyx Mimari Ekibi</div>
         </div>
     </footer>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <script>
-        // Fade in animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Performance Chart
-        const performanceCtx = document.getElementById('performanceChart').getContext('2d');
-        new Chart(performanceCtx, {
-            type: 'line',
-            data: {
-                labels: ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz'],
-                datasets: [{
-                    label: 'Performans',
-                    data: [65, 78, 82, 91, 87, 95],
-                    borderColor: '#2fb17f',
-                    backgroundColor: 'rgba(47, 177, 127, 0.1)',
-                    tension: 0.4,
-                    fill: true
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        labels: {
-                            color: '#ffffff'
-                        }
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: {
-                            color: '#2a3142'
-                        },
-                        ticks: {
-                            color: '#8b92a8'
-                        }
-                    },
-                    x: {
-                        grid: {
-                            color: '#2a3142'
-                        },
-                        ticks: {
-                            color: '#8b92a8'
-                        }
-                    }
-                }
-            }
-        });
-
-        // Profit Chart
-        const profitCtx = document.getElementById('profitChart').getContext('2d');
-        new Chart(profitCtx, {
-            type: 'bar',
-            data: {
-                labels: ['BTC', 'ETH', 'SOL', 'ADA', 'DOT', 'LINK'],
-                datasets: [{
-                    label: 'Kâr/Zarar',
-                    data: [1234, 890, 456, 345, 678, 234],
-                    backgroundColor: [
-                        'rgba(47, 177, 127, 0.8)',
-                        'rgba(47, 177, 127, 0.8)',
-                        'rgba(255, 68, 68, 0.8)',
-                        'rgba(47, 177, 127, 0.8)',
-                        'rgba(47, 177, 127, 0.8)',
-                        'rgba(255, 68, 68, 0.8)'
-                    ],
-                    borderColor: [
-                        '#2fb17f',
-                        '#2fb17f',
-                        '#ff4444',
-                        '#2fb17f',
-                        '#2fb17f',
-                        '#ff4444'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        labels: {
-                            color: '#ffffff'
-                        }
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: {
-                            color: '#2a3142'
-                        },
-                        ticks: {
-                            color: '#8b92a8'
-                        }
-                    },
-                    x: {
-                        grid: {
-                            color: '#2a3142'
-                        },
-                        ticks: {
-                            color: '#8b92a8'
-                        }
-                    }
-                }
-            }
-        });
-
-        // Navbar background on scroll
-        window.addEventListener('scroll', function() {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.style.background = 'rgba(15, 20, 25, 0.98)';
-            } else {
-                navbar.style.background = 'rgba(15, 20, 25, 0.95)';
-            }
-        });
-    </script>
 </body>
 </html>
