@@ -2,7 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.sentralyx.com/</loc>
-    <lastmod>2026-04-18</lastmod>
-    <priority>1.0</priority>
+    <lastmod>2026-04-19</lastmod>
+    <priority>1.00</priority>
+  </url>
+  <url>
+    <loc>https://www.sentralyx.com/scanner/</loc>
+    <lastmod>2026-04-19</lastmod>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://www.sentralyx.com/active-positions/</loc>
+    <lastmod>2026-04-19</lastmod>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.sentralyx.com/strategies/</loc>
+    <lastmod>2026-04-19</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.sentralyx.com/reports/</loc>
+    <lastmod>2026-04-19</lastmod>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.sentralyx.com/history/</loc>
+    <lastmod>2026-04-19</lastmod>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://www.sentralyx.com/indicators/</loc>
+    <lastmod>2026-04-19</lastmod>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://www.sentralyx.com/settings/</loc>
+    <lastmod>2026-04-19</lastmod>
+    <priority>0.60</priority>
   </url>
 </urlset>
