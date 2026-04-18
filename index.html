@@ -18,32 +18,14 @@
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     
     <style>
-        :root {
-            --primary-dark: #0f1419;
-            --secondary-dark: #1a1f2e;
-            --accent-green: #2fb17f;
-            --accent-blue: #00d4ff;
-            --text-primary: #ffffff;
-            --text-secondary: #8b92a8;
-            --border-color: #2a3142;
-            --card-bg: #1a1f2e;
-        }
-
-        body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: var(--primary-dark);
-            color: var(--text-primary);
-            line-height: 1.6;
-        }
-
-        /* Navbar Customization */
+        /* Override Bootstrap with Sentralyx variables */
         .navbar {
-            background: rgba(15, 20, 25, 0.95);
+            background: rgba(11, 17, 27, 0.95);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border-color);
-            padding: 0.8rem 0;
         }
         .navbar-brand img {
             height: 40px;
@@ -82,14 +64,101 @@
 
         /* Sections */
         .section-padding { padding: 80px 0; }
-        .feature-card {
-            background: var(--card-bg);
+        
+        /* Terminal Feature Cards */
+        .terminal-feature-card {
+            background: var(--panel-dark);
             border: 1px solid var(--border-color);
             border-radius: 15px;
             padding: 30px;
             height: 100%;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
-        .feature-icon { color: var(--accent-green); font-size: 2.5rem; margin-bottom: 20px; }
+        
+        .terminal-feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.2);
+            border-color: var(--accent-blue);
+        }
+        
+        .terminal-feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+            transition: left 0.5s;
+        }
+        
+        .terminal-feature-card:hover::before {
+            left: 100%;
+        }
+        
+        .feature-icon { 
+            color: var(--accent-blue); 
+            font-size: 2.5rem; 
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .feature-title {
+            color: var(--text-main);
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .feature-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        
+        .feature-action-btn {
+            background: linear-gradient(135deg, var(--accent-blue), var(--signal-buy));
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .feature-action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+            color: white;
+        }
+        
+        .hero-main-btn {
+            background: linear-gradient(135deg, var(--accent-blue), var(--signal-buy));
+            border: none;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 25px rgba(52, 152, 219, 0.4);
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        
+        .hero-main-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(52, 152, 219, 0.5);
+            color: white;
+        }
 
         .footer {
             border-top: 1px solid var(--border-color);
@@ -104,90 +173,122 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg sticky-top">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="#">
-                <img src="sentralyx_logo_master.svg" alt="Sentralyx Logo">
-                <span class="fw-bold text-white">SENTRALYX</span>
-            </a>
-            <div class="navbar-nav ms-auto d-none d-lg-flex">
-                <a class="nav-link text-white px-3" href="#scanner">Scanner</a>
-                <a class="nav-link text-white px-3" href="#reports">Raporlar</a>
-                <a class="nav-link text-white px-3" href="#features">Özellikler</a>
-            </div>
-        </div>
-    </nav>
+    <header id="main-header"></header>
 
     <header class="hero">
         <div class="container">
             <h1 class="display-3">Trading Süreçlerinizi Otomatize Edin</h1>
-            <p class="lead text-secondary mb-5">Sentralyx ile piyasa verilerini saniyeler içinde analiz edin, stratejinizi belirleyin ve verimliliği artırın.</p>
+            <p class="lead text-secondary mb-5">Sentralyx ile piyasa verilerini saniyeler içinde analiz edin, stratejinizi belirleyin ve verimliliğinizi artırın.</p>
+            <a href="scanner/" class="hero-main-btn">
+                <i class="fas fa-rocket me-2"></i>Terminali Keşfet
+            </a>
             <img src="scanner.png" alt="Sentralyx Scanner" class="terminal-img">
         </div>
     </header>
 
-    <section id="scanner" class="section-padding">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-5">
-                    <h2 class="mb-4">Akıllı Market Scanner</h2>
-                    <p class="text-secondary">Piyasadaki yüzlerce pariteyi aynı anda, belirlediğiniz teknik kriterlere göre tarayın. MTF (Çoklu Zaman Dilimi) onayı ile sinyal kalitesini en üst seviyeye taşıyın.</p>
-                    <ul class="list-unstyled text-secondary">
-                        <li><i class="fas fa-check text-success me-2"></i> Anlık RSI, MACD ve SMI Filtreleri</li>
-                        <li><i class="fas fa-check text-success me-2"></i> Özelleştirilebilir Zaman Dilimleri</li>
-                        <li><i class="fas fa-check text-success me-2"></i> Hızlı Sinyal Üretimi</li>
-                    </ul>
-                </div>
-                <div class="col-lg-7">
-                    <img src="scanner.png" alt="Scanner Ekranı" class="terminal-img">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="reports" class="section-padding bg-dark bg-opacity-25">
-        <div class="container">
-            <div class="row align-items-center flex-row-reverse">
-                <div class="col-lg-5">
-                    <h2 class="mb-4">Şeffaf Performans Takibi</h2>
-                    <p class="text-secondary">Tüm işlemlerinizi detaylı olarak raporlayın. Başarı oranınızı, kâr/zarar grafiklerinizi ve strateji performansınızı tek ekrandan izleyin.</p>
-                </div>
-                <div class="col-lg-7">
-                    <img src="reports.png" alt="Raporlama Ekranı" class="terminal-img">
-                </div>
-            </div>
-        </div>
-    </section>
-
     <section id="features" class="section-padding">
         <div class="container">
             <div class="text-center mb-5">
-                <h2>Kapsamlı Modüller</h2>
-                <p class="text-secondary">Bir trader'ın ihtiyacı olan tüm araçlar tek bir terminalde toplandı.</p>
+                <h2 class="text-main">Terminal Modülleri</h2>
+                <p class="text-secondary">Bir trader'ın ihtiyacını olan tüm araçlar tek bir terminalde toplandı.</p>
             </div>
             <div class="row g-4">
                 <div class="col-md-4">
-                    <div class="feature-card">
+                    <div class="terminal-feature-card">
+                        <i class="fas fa-search feature-icon"></i>
+                        <h4 class="feature-title">Market Scanner</h4>
+                        <p class="feature-description">Piyasadaki yüzlerce pariteyi aynı anda, belirlediğiniz teknik kriterlere göre tarayın. MTF onaylı ile sinyal kalitesini en üst seviyeye taşıyın.</p>
+                        <a href="scanner/" class="feature-action-btn">
+                            <i class="fas fa-arrow-right me-2"></i>İncele
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="terminal-feature-card">
+                        <i class="fas fa-chart-line feature-icon"></i>
+                        <h4 class="feature-title">Performans Raporları</h4>
+                        <p class="feature-description">Tüm işlemlerinizi detaylı olarak raporlayın. Başarı oranınızı, kâr/zarar grafiklerinizi ve strateji performansınızı tek ekrandan izleyin.</p>
+                        <a href="reports/" class="feature-action-btn">
+                            <i class="fas fa-arrow-right me-2"></i>Detaylı Bilgi
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="terminal-feature-card">
+                        <i class="fas fa-history feature-icon"></i>
+                        <h4 class="feature-title">İşlem Geçmişi</h4>
+                        <p class="feature-description">Kapalı pozisyonlarınızın detaylı analizini yapın. Giriş/çıkış fiyatları, kâr/zarar oranları ve işlem süreleri hakkında veriye erişim.</p>
+                        <a href="history/" class="feature-action-btn">
+                            <i class="fas fa-arrow-right me-2"></i>İncele
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="terminal-feature-card">
+                        <i class="fas fa-exchange-alt feature-icon"></i>
+                        <h4 class="feature-title">Aktif Pozisyonlar</h4>
+                        <p class="feature-description">Tüm açık işlemlerinizi anlık PnL verileriyle takip edin. Stop Loss ve Take Profit seviyelerini yönetin.</p>
+                        <a href="active-positions/" class="feature-action-btn">
+                            <i class="fas fa-arrow-right me-2"></i>Yönet
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="terminal-feature-card">
                         <i class="fas fa-layer-group feature-icon"></i>
-                        <h4>Strateji Yönetimi</h4>
-                        <img src="strategy.png" alt="Strateji" class="img-fluid rounded border border-secondary my-3">
-                        <p class="text-secondary small">Majority, Scoring ve Full Consensus yöntemleriyle kendi karar mekanizmanızı kurun.</p>
+                        <h4 class="feature-title">Strateji Yönetimi</h4>
+                        <p class="feature-description">Majority, Scoring ve Full Consensus yöntemleriyle kendi karar mekanizmanızı kurun. Wizard ile hızlı strateji oluşturun.</p>
+                        <a href="strategies/" class="feature-action-btn">
+                            <i class="fas fa-arrow-right me-2"></i>Detaylı Bilgi
+                        </a>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="feature-card">
-                        <i class="fas fa-chart-bar feature-icon"></i>
-                        <h4>Aktif Pozisyonlar</h4>
-                        <img src="open_position.png" alt="Açık Pozisyonlar" class="img-fluid rounded border border-secondary my-3">
-                        <p class="text-secondary small">Tüm açık işlemlerinizi anlık PnL verileriyle takip edin ve yönetin.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="feature-card">
+                    <div class="terminal-feature-card">
                         <i class="fas fa-sliders-h feature-icon"></i>
-                        <h4>İndikatör Ayarları</h4>
-                        <img src="indikator_settings.png" alt="Ayarlar" class="img-fluid rounded border border-secondary my-3">
-                        <p class="text-secondary small">Kullandığınız indikatörlerin parametrelerini stratejinize göre optimize edin.</p>
+                        <h4 class="feature-title">İndikatör Ayarları</h4>
+                        <p class="feature-description">Kullandığınız indikatörlerin parametrelerini stratejinize göre optimize edin. AL/SAT kurallarını özelleştirin.</p>
+                        <a href="indicators/" class="feature-action-btn">
+                            <i class="fas fa-arrow-right me-2"></i>Yapılandır
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="terminal-feature-card">
+                        <i class="fas fa-cog feature-icon"></i>
+                        <h4 class="feature-title">Genel Ayarlar</h4>
+                        <p class="feature-description">API bağlantılar, risk yönetimi ve sistem ayarlarınızı tek bir yerden yönetin. Borsa entegrasyonlarını yapılandırın.</p>
+                        <a href="settings/" class="feature-action-btn">
+                            <i class="fas fa-arrow-right me-2"></i>Ayarlar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Navigation Section -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="text-main">Hızlı Erişim</h2>
+                <p class="text-secondary">Terminalin en çok kullanılan özelliklerine hızlıca ulaşın</p>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-auto">
+                    <div class="panel-dark p-4 text-center">
+                        <h5 class="text-main mb-4">Terminal Kontrolü</h5>
+                        <div class="d-flex gap-3 justify-content-center flex-wrap">
+                            <a href="scanner/" class="btn-sentralyx-start">
+                                <i class="fas fa-search me-2"></i>Scanner
+                            </a>
+                            <a href="active-positions/" class="btn-sentralyx-pause">
+                                <i class="fas fa-exchange-alt me-2"></i>Pozisyonlar
+                            </a>
+                            <a href="settings/" class="btn-sentralyx-stop">
+                                <i class="fas fa-cog me-2"></i>Ayarlar
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -202,5 +303,6 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
 </body>
 </html>

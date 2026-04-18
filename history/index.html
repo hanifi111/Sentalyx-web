@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kapali Pozisyonlar - Sentralyx Trading Terminal</title>
+    <link rel="icon" type="image/svg+xml" href="../sentralyx_logo_master.svg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        .history-container {
+            padding: 20px;
+            background: var(--bg-dark);
+            min-height: 100vh;
+        }
+        
+        .summary-card {
+            background: var(--panel-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .summary-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.2);
+            border-color: var(--accent-blue);
+        }
+        
+        .summary-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+            transition: left 0.5s;
+        }
+        
+        .summary-card:hover::before {
+            left: 100%;
+        }
+        
+        .summary-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, var(--accent-blue), var(--signal-buy));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .summary-card .value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 5px;
+        }
+        
+        .summary-card.profit .value {
+            color: var(--signal-buy);
+            text-shadow: 0 0 20px rgba(46, 204, 113, 0.5);
+        }
+        
+        .summary-card.loss .value {
+            color: var(--signal-sell);
+            text-shadow: 0 0 20px rgba(231, 76, 60, 0.5);
+        }
+        
+        .filter-panel {
+            background: var(--panel-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .table-custom {
+            background: var(--panel-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .table-custom thead {
+            background: rgba(52, 152, 219, 0.1);
+            border-bottom: 2px solid var(--accent-blue);
+        }
+        
+        .table-custom th {
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            padding: 12px;
+            border: none;
+            color: var(--text-main);
+        }
+        
+        .table-custom td {
+            padding: 12px;
+            border: none;
+            border-bottom: 1px solid rgba(42, 49, 66, 0.3);
+            color: var(--text-main);
+        }
+        
+        .table-custom tbody tr:hover {
+            background: rgba(52, 152, 219, 0.05);
+            box-shadow: inset 0 0 10px rgba(52, 152, 219, 0.1);
+        }
+        
+        .pnl-positive {
+            color: var(--signal-buy);
+            font-weight: 600;
+        }
+        
+        .pnl-negative {
+            color: var(--signal-sell);
+            font-weight: 600;
+        }
+        
+        .direction-buy {
+            color: var(--signal-buy);
+            font-weight: 600;
+        }
+        
+        .direction-sell {
+            color: var(--signal-sell);
+            font-weight: 600;
+        }
+        
+        .close-reason {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .reason-sl {
+            background: rgba(231, 76, 60, 0.2);
+            color: var(--signal-sell);
+        }
+        
+        .reason-tp {
+            background: rgba(46, 204, 113, 0.2);
+            color: var(--signal-buy);
+        }
+        
+        .reason-manual {
+            background: rgba(52, 152, 219, 0.2);
+            color: var(--accent-blue);
+        }
+        
+        .duration-badge {
+            background: rgba(42, 49, 66, 0.5);
+            color: var(--text-secondary);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+        
+        .export-btn {
+            background: linear-gradient(135deg, var(--accent-blue), var(--signal-buy));
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .export-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .section-title {
+            color: var(--text-main);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-right: 10px;
+            color: var(--accent-blue);
+        }
+        
+        .profit-row {
+            background: rgba(46, 204, 113, 0.05);
+        }
+        
+        .loss-row {
+            background: rgba(231, 76, 60, 0.05);
+        }
+        
+        .date-filter {
+            background: rgba(42, 49, 66, 0.3);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            border-radius: 6px;
+            padding: 8px 12px;
+        }
+        
+        .date-filter:focus {
+            background: rgba(42, 49, 66, 0.5);
+            border-color: var(--accent-blue);
+            color: var(--text-main);
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.2);
+        }
+        
+        .filter-select {
+            background: rgba(42, 49, 66, 0.3);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            border-radius: 6px;
+            padding: 8px 12px;
+        }
+        
+        .filter-select:focus {
+            background: rgba(42, 49, 66, 0.5);
+            border-color: var(--accent-blue);
+            color: var(--text-main);
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <header id="main-header"></header>
+    
+    <main class="history-container">
+        <!-- Summary Cards -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="summary-card">
+                    <div class="icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <div class="value">287</div>
+                    <div class="text-secondary">Toplam Kapali</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="summary-card profit">
+                    <div class="icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="value">189 / 98</div>
+                    <div class="text-secondary">Kârlı / Zararlı</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="summary-card profit">
+                    <div class="icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="value">+5,234.56</div>
+                    <div class="text-secondary">Toplam PnL (USDT)</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="summary-card">
+                    <div class="icon">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <div class="value">65.8%</div>
+                    <div class="text-secondary">Başarı Oranı</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter Panel -->
+        <div class="filter-panel">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-wrap gap-2 align-items-center">
+                        <span class="text-main me-2">Filtreler:</span>
+                        <input type="date" class="form-control date-filter" id="startDate" style="max-width: 150px;">
+                        <input type="date" class="form-control date-filter" id="endDate" style="max-width: 150px;">
+                        <select class="form-select filter-select" style="max-width: 120px;">
+                            <option>Sembol: Tümü</option>
+                            <option>BTCUSDT</option>
+                            <option>ETHUSDT</option>
+                            <option>SOLUSDT</option>
+                        </select>
+                        <select class="form-select filter-select" style="max-width: 120px;">
+                            <option>Yön: Tümü</option>
+                            <option>BUY</option>
+                            <option>SELL</option>
+                        </select>
+                        <select class="form-select filter-select" style="max-width: 120px;">
+                            <option>Neden: Tümü</option>
+                            <option>SL</option>
+                            <option>TP</option>
+                            <option>Manuel</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4 text-end">
+                    <button class="btn btn-sm btn-primary me-2" onclick="applyFilters()">
+                        <i class="fas fa-filter me-1"></i>Filtrele
+                    </button>
+                    <button class="export-btn" onclick="exportToCSV()">
+                        <i class="fas fa-download me-2"></i>CSV Dışa Aktar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Closed Positions Table -->
+        <div class="table-custom">
+            <div class="p-3 border-bottom border-custom">
+                <h5 class="mb-0 section-title">
+                    <i class="fas fa-times-circle"></i>Kapali Pozisyonlar
+                </h5>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-custom mb-0">
+                    <thead>
+                        <tr>
+                            <th>Sembol</th>
+                            <th>Yön</th>
+                            <th>Giriş Fiyatı</th>
+                            <th>Kapanış Fiyatı</th>
+                            <th>Kâr/Zarar ($)</th>
+                            <th>Kâr/Zarar (%)</th>
+                            <th>Kapanış Nedeni</th>
+                            <th>Toplam Süre</th>
+                            <th>Tarih</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="profit-row">
+                            <td><strong>BTCUSDT</strong></td>
+                            <td class="direction-buy">BUY</td>
+                            <td>42,156.78</td>
+                            <td>43,890.45</td>
+                            <td class="pnl-positive">+1,733.67</td>
+                            <td class="pnl-positive">+4.11%</td>
+                            <td><span class="close-reason reason-tp">TP</span></td>
+                            <td><span class="duration-badge">2s 45d</span></td>
+                            <td>18.04.2026 14:32</td>
+                        </tr>
+                        <tr class="loss-row">
+                            <td><strong>ETHUSDT</strong></td>
+                            <td class="direction-sell">SELL</td>
+                            <td>2,245.32</td>
+                            <td>2,289.67</td>
+                            <td class="pnl-negative">-44.35</td>
+                            <td class="pnl-negative">-1.98%</td>
+                            <td><span class="close-reason reason-sl">SL</span></td>
+                            <td><span class="duration-badge">1s 12d</span></td>
+                            <td>18.04.2026 15:45</td>
+                        </tr>
+                        <tr class="profit-row">
+                            <td><strong>SOLUSDT</strong></td>
+                            <td class="direction-buy">BUY</td>
+                            <td>98.45</td>
+                            <td>105.23</td>
+                            <td class="pnl-positive">+678.00</td>
+                            <td class="pnl-positive">+6.88%</td>
+                            <td><span class="close-reason reason-manuel">Manuel</span></td>
+                            <td><span class="duration-badge">3s 2d</span></td>
+                            <td>17.04.2026 16:12</td>
+                        </tr>
+                        <tr class="profit-row">
+                            <td><strong>ADAUSDT</strong></td>
+                            <td class="direction-sell">SELL</td>
+                            <td>0.582</td>
+                            <td>0.568</td>
+                            <td class="pnl-positive">+70.00</td>
+                            <td class="pnl-positive">+12.03%</td>
+                            <td><span class="close-reason reason-tp">TP</span></td>
+                            <td><span class="duration-badge">4s 18d</span></td>
+                            <td>17.04.2026 17:28</td>
+                        </tr>
+                        <tr class="loss-row">
+                            <td><strong>AVAXUSDT</strong></td>
+                            <td class="direction-buy">BUY</td>
+                            <td>35.67</td>
+                            <td>34.89</td>
+                            <td class="pnl-negative">-117.00</td>
+                            <td class="pnl-negative">-3.28%</td>
+                            <td><span class="close-reason reason-sl">SL</span></td>
+                            <td><span class="duration-badge">2s 5d</span></td>
+                            <td>16.04.2026 18:55</td>
+                        </tr>
+                        <tr class="profit-row">
+                            <td><strong>DOTUSDT</strong></td>
+                            <td class="direction-sell">SELL</td>
+                            <td>7.50</td>
+                            <td>7.25</td>
+                            <td class="pnl-positive">+125.00</td>
+                            <td class="pnl-positive">+3.33%</td>
+                            <td><span class="close-reason reason-tp">TP</span></td>
+                            <td><span class="duration-badge">1s 22d</span></td>
+                            <td>16.04.2026 13:22</td>
+                        </tr>
+                        <tr class="loss-row">
+                            <td><strong>LINKUSDT</strong></td>
+                            <td class="direction-buy">BUY</td>
+                            <td>13.92</td>
+                            <td>13.45</td>
+                            <td class="pnl-negative">-94.00</td>
+                            <td class="pnl-negative">-6.75%</td>
+                            <td><span class="close-reason reason-manuel">Manuel</span></td>
+                            <td><span class="duration-badge">5s 8d</span></td>
+                            <td>15.04.2026 14:18</td>
+                        </tr>
+                        <tr class="profit-row">
+                            <td><strong>MATICUSDT</strong></td>
+                            <td class="direction-sell">SELL</td>
+                            <td>0.59</td>
+                            <td>0.57</td>
+                            <td class="pnl-positive">+40.00</td>
+                            <td class="pnl-positive">+6.78%</td>
+                            <td><span class="close-reason reason-tp">TP</span></td>
+                            <td><span class="duration-badge">3s 14d</span></td>
+                            <td>15.04.2026 15:33</td>
+                        </tr>
+                        <tr class="profit-row">
+                            <td><strong>UNIUSDT</strong></td>
+                            <td class="direction-buy">BUY</td>
+                            <td>8.23</td>
+                            <td>8.67</td>
+                            <td class="pnl-positive">+440.00</td>
+                            <td class="pnl-positive">+5.34%</td>
+                            <td><span class="close-reason reason-manuel">Manuel</span></td>
+                            <td><span class="duration-badge">2s 19d</span></td>
+                            <td>14.04.2026 11:45</td>
+                        </tr>
+                        <tr class="loss-row">
+                            <td><strong>ATOMUSDT</strong></td>
+                            <td class="direction-sell">SELL</td>
+                            <td>6.78</td>
+                            <td>6.95</td>
+                            <td class="pnl-negative">-170.00</td>
+                            <td class="pnl-negative">-2.51%</td>
+                            <td><span class="close-reason reason-sl">SL</span></td>
+                            <td><span class="duration-badge">4s 3d</span></td>
+                            <td>14.04.2026 16:20</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="d-flex justify-content-between align-items-center mt-3">
+            <div class="text-secondary">
+                Gösterilen: 1-10 / 287 kayıt
+            </div>
+            <nav>
+                <ul class="pagination pagination-sm mb-0">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">
+                            <i class="fas fa-chevron-left"></i>
+                        </a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script>
+        function applyFilters() {
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            
+            console.log('Filters applied:', { startDate, endDate });
+            
+            // Add filter logic here
+            // For demo purposes, just show a message
+            const tbody = document.querySelector('.table-custom tbody');
+            const originalContent = tbody.innerHTML;
+            
+            // Show loading state
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="9" class="text-center py-4">
+                        <i class="fas fa-spinner fa-spin me-2"></i>
+                        Filtreler uygulanıyor...
+                    </td>
+                </tr>
+            `;
+            
+            // Simulate filtering
+            setTimeout(() => {
+                tbody.innerHTML = originalContent;
+                showNotification('Filtreler başarıyla uygulandı', 'success');
+            }, 1000);
+        }
+
+        function exportToCSV() {
+            // Create CSV content
+            let csvContent = "Sembol,Yön,Giriş Fiyatı,Kapanış Fiyatı,Kâr/Zarar ($),Kâr/Zarar (%),Kapanış Nedeni,Toplam Süre,Tarih\n";
+            
+            // Add sample data
+            csvContent += "BTCUSDT,BUY,42156.78,43890.45,+1733.67,+4.11%,TP,2s 45d,18.04.2026 14:32\n";
+            csvContent += "ETHUSDT,SELL,2245.32,2289.67,-44.35,-1.98%,SL,1s 12d,18.04.2026 15:45\n";
+            csvContent += "SOLUSDT,BUY,98.45,105.23,+678.00,+6.88%,Manuel,3s 2d,17.04.2026 16:12\n";
+            csvContent += "ADAUSDT,SELL,0.582,0.568,+70.00,+12.03%,TP,4s 18d,17.04.2026 17:28\n";
+            csvContent += "AVAXUSDT,BUY,35.67,34.89,-117.00,-3.28%,SL,2s 5d,16.04.2026 18:55\n";
+            
+            // Create download link
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', `sentralyx_kapali_pozisyonlar_${new Date().toISOString().split('T')[0]}.csv`);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            showNotification('CSV dosyası başarıyla indirildi', 'success');
+        }
+
+        function showNotification(message, type) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `alert alert-${type === 'success' ? 'success' : 'danger'} position-fixed top-0 end-0 m-3`;
+            notification.style.zIndex = '9999';
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'} me-2"></i>
+                ${message}
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Initialize with today's date
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('endDate').value = today;
+            
+            const monthAgo = new Date();
+            monthAgo.setMonth(monthAgo.getMonth() - 1);
+            document.getElementById('startDate').value = monthAgo.toISOString().split('T')[0];
+        });
+    </script>
+</body>
+</html>

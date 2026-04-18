@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raporlar - Sentralyx Trading Terminal</title>
+    <link rel="icon" type="image/svg+xml" href="../sentralyx_logo_master.svg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        .reports-container {
+            padding: 20px;
+            background: var(--bg-dark);
+            min-height: 100vh;
+        }
+        
+        .summary-card {
+            background: var(--panel-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .summary-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.2);
+            border-color: var(--accent-blue);
+        }
+        
+        .summary-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+            transition: left 0.5s;
+        }
+        
+        .summary-card:hover::before {
+            left: 100%;
+        }
+        
+        .summary-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, var(--accent-blue), var(--signal-buy));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .summary-card .value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 5px;
+        }
+        
+        .summary-card.profit .value {
+            color: var(--signal-buy);
+            text-shadow: 0 0 20px rgba(46, 204, 113, 0.5);
+        }
+        
+        .summary-card.loss .value {
+            color: var(--signal-sell);
+            text-shadow: 0 0 20px rgba(231, 76, 60, 0.5);
+        }
+        
+        .filter-panel {
+            background: var(--panel-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .quick-filter-btn {
+            background: rgba(52, 152, 219, 0.1);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+        
+        .quick-filter-btn:hover {
+            background: rgba(52, 152, 219, 0.2);
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+            transform: translateY(-2px);
+        }
+        
+        .quick-filter-btn.active {
+            background: var(--accent-blue);
+            color: white;
+            border-color: var(--accent-blue);
+        }
+        
+        .table-custom {
+            background: var(--panel-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .table-custom thead {
+            background: rgba(52, 152, 219, 0.1);
+            border-bottom: 2px solid var(--accent-blue);
+        }
+        
+        .table-custom th {
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            padding: 12px;
+            border: none;
+            color: var(--text-main);
+        }
+        
+        .table-custom td {
+            padding: 12px;
+            border: none;
+            border-bottom: 1px solid rgba(42, 49, 66, 0.3);
+            color: var(--text-main);
+        }
+        
+        .table-custom tbody tr:hover {
+            background: rgba(52, 152, 219, 0.05);
+            box-shadow: inset 0 0 10px rgba(52, 152, 219, 0.1);
+        }
+        
+        .pnl-positive {
+            color: var(--signal-buy);
+            font-weight: 600;
+        }
+        
+        .pnl-negative {
+            color: var(--signal-sell);
+            font-weight: 600;
+        }
+        
+        .pnl-arrow {
+            font-size: 0.8rem;
+            margin-right: 3px;
+        }
+        
+        .date-filter {
+            background: rgba(42, 49, 66, 0.3);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            border-radius: 6px;
+            padding: 8px 12px;
+        }
+        
+        .date-filter:focus {
+            background: rgba(42, 49, 66, 0.5);
+            border-color: var(--accent-blue);
+            color: var(--text-main);
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.2);
+        }
+        
+        .export-btn {
+            background: linear-gradient(135deg, var(--accent-blue), var(--signal-buy));
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .export-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .section-title {
+            color: var(--text-main);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-right: 10px;
+            color: var(--accent-blue);
+        }
+        
+        .details-table {
+            background: var(--panel-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 25px;
+        }
+        
+        .profit-row {
+            background: rgba(46, 204, 113, 0.05);
+        }
+        
+        .loss-row {
+            background: rgba(231, 76, 60, 0.05);
+        }
+        
+        .direction-buy {
+            color: var(--signal-buy);
+            font-weight: 600;
+        }
+        
+        .direction-sell {
+            color: var(--signal-sell);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <header id="main-header"></header>
+    
+    <main class="reports-container">
+        <!-- Summary Cards -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="summary-card">
+                    <div class="icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="value">156</div>
+                    <div class="text-secondary">Toplam İşlem</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="summary-card profit">
+                    <div class="icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="value">98 / 58</div>
+                    <div class="text-secondary">Kârlı / Zararlı</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="summary-card profit">
+                    <div class="icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="value">+2,456.78</div>
+                    <div class="text-secondary">Toplam PnL (USDT)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter Panel -->
+        <div class="filter-panel">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <div class="d-flex flex-wrap gap-2 align-items-center">
+                        <span class="text-main me-2">Hızlı Filtre:</span>
+                        <button class="quick-filter-btn" onclick="setQuickFilter('1h')">Son 1s</button>
+                        <button class="quick-filter-btn" onclick="setQuickFilter('24h')">Son 24s</button>
+                        <button class="quick-filter-btn active" onclick="setQuickFilter('7d')">Son 7 Gün</button>
+                        <button class="quick-filter-btn" onclick="setQuickFilter('30d')">Son 30 Gün</button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="d-flex gap-2">
+                        <input type="date" class="form-control date-filter" id="startDate">
+                        <input type="date" class="form-control date-filter" id="endDate">
+                        <button class="btn btn-sm btn-primary" onclick="applyDateFilter()">Uygula</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <div class="d-flex gap-2">
+                        <select class="form-select form-select-sm date-filter" style="max-width: 150px;">
+                            <option>Yön: Tümü</option>
+                            <option>AL</option>
+                            <option>SAT</option>
+                        </select>
+                        <select class="form-select form-select-sm date-filter" style="max-width: 150px;">
+                            <option>PnL: Tümü</option>
+                            <option>Kârlı</option>
+                            <option>Zararlı</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6 text-end">
+                    <button class="export-btn" onclick="exportToCSV()">
+                        <i class="fas fa-download me-2"></i>CSV Dışa Aktar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Daily Summary Table -->
+        <div class="table-custom">
+            <div class="p-3 border-bottom border-custom">
+                <h5 class="mb-0 section-title">
+                    <i class="fas fa-calendar-alt"></i>Günlük Özet
+                </h5>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-custom mb-0">
+                    <thead>
+                        <tr>
+                            <th>Tarih</th>
+                            <th>İşlem Sayısı</th>
+                            <th>Başarı Oranı (%)</th>
+                            <th>Toplam PnL (USDT)</th>
+                            <th>Ortalama PnL</th>
+                            <th>En İyi İşlem</th>
+                            <th>En Kötü İşlem</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr onclick="showDayDetails('2026-04-18')" style="cursor: pointer;">
+                            <td><strong>18.04.2026</strong></td>
+                            <td>24</td>
+                            <td class="pnl-positive">67.5%</td>
+                            <td class="pnl-positive"><span class="pnl-arrow">â²</span>+456.32</td>
+                            <td class="pnl-positive">+19.01</td>
+                            <td class="pnl-positive">+125.50</td>
+                            <td class="pnl-negative">-23.80</td>
+                        </tr>
+                        <tr onclick="showDayDetails('2026-04-17')" style="cursor: pointer;">
+                            <td><strong>17.04.2026</strong></td>
+                            <td>18</td>
+                            <td class="pnl-negative">55.6%</td>
+                            <td class="pnl-negative"><span class="pnl-arrow">â¼</span>-89.45</td>
+                            <td class="pnl-negative">-4.97</td>
+                            <td class="pnl-positive">+67.20</td>
+                            <td class="pnl-negative">-45.30</td>
+                        </tr>
+                        <tr onclick="showDayDetails('2026-04-16')" style="cursor: pointer;">
+                            <td><strong>16.04.2026</strong></td>
+                            <td>31</td>
+                            <td class="pnl-positive">71.0%</td>
+                            <td class="pnl-positive"><span class="pnl-arrow">â²</span>+789.12</td>
+                            <td class="pnl-positive">+25.46</td>
+                            <td class="pnl-positive">+156.80</td>
+                            <td class="pnl-negative">-34.20</td>
+                        </tr>
+                        <tr onclick="showDayDetails('2026-04-15')" style="cursor: pointer;">
+                            <td><strong>15.04.2026</strong></td>
+                            <td>22</td>
+                            <td class="pnl-positive">63.6%</td>
+                            <td class="pnl-positive"><span class="pnl-arrow">â²</span>+234.67</td>
+                            <td class="pnl-positive">+10.67</td>
+                            <td class="pnl-positive">+89.40</td>
+                            <td class="pnl-negative">-28.90</td>
+                        </tr>
+                        <tr onclick="showDayDetails('2026-04-14')" style="cursor: pointer;">
+                            <td><strong>14.04.2026</strong></td>
+                            <td>19</td>
+                            <td class="pnl-negative">52.6%</td>
+                            <td class="pnl-negative"><span class="pnl-arrow">â¼</span>-156.23</td>
+                            <td class="pnl-negative">-8.23</td>
+                            <td class="pnl-positive">+45.60</td>
+                            <td class="pnl-negative">-67.80</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Transaction Details Table -->
+        <div class="details-table" id="detailsTable" style="display: none;">
+            <div class="p-3 border-bottom border-custom">
+                <h5 class="mb-0 section-title">
+                    <i class="fas fa-list"></i>İşlem Detayları - <span id="selectedDate">18.04.2026</span>
+                </h5>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-custom mb-0">
+                    <thead>
+                        <tr>
+                            <th>Tarih</th>
+                            <th>Sembol</th>
+                            <th>Yön</th>
+                            <th>Miktar</th>
+                            <th>USDT</th>
+                            <th>Giriş</th>
+                            <th>Çıkış</th>
+                            <th>PnL (USDT)</th>
+                            <th>%</th>
+                        </tr>
+                    </thead>
+                    <tbody id="detailsBody">
+                        <!-- Details will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script>
+        // Sample transaction data
+        const transactionData = {
+            '2026-04-18': [
+                { date: '2026-04-18 14:32:15', symbol: 'BTCUSDT', direction: 'BUY', amount: 0.025, usdt: 1081.42, entry: 43256.78, exit: 43890.45, pnl: 15.83, percent: 1.46 },
+                { date: '2026-04-18 15:45:22', symbol: 'ETHUSDT', direction: 'SELL', amount: 0.5, usdt: 1122.66, entry: 2245.32, exit: 2210.15, pnl: 17.59, percent: 1.57 },
+                { date: '2026-04-18 16:12:08', symbol: 'SOLUSDT', direction: 'BUY', amount: 10, usdt: 984.50, entry: 98.45, exit: 102.30, pnl: 38.50, percent: 3.91 },
+                { date: '2026-04-18 17:28:33', symbol: 'ADAUSDT', direction: 'SELL', amount: 500, usdt: 291.00, entry: 0.582, exit: 0.568, pnl: -7.00, percent: -2.41 },
+                { date: '2026-04-18 18:55:41', symbol: 'AVAXUSDT', direction: 'BUY', amount: 15, usdt: 535.05, entry: 35.67, exit: 37.89, pnl: 33.30, percent: 6.22 }
+            ],
+            '2026-04-17': [
+                { date: '2026-04-17 13:22:10', symbol: 'DOTUSDT', direction: 'BUY', amount: 50, usdt: 375.00, entry: 7.50, exit: 7.25, pnl: -12.50, percent: -3.33 },
+                { date: '2026-04-17 14:18:45', symbol: 'LINKUSDT', direction: 'SELL', amount: 20, usdt: 278.40, entry: 13.92, exit: 14.15, pnl: 4.60, percent: 1.65 },
+                { date: '2026-04-17 15:33:27', symbol: 'MATICUSDT', direction: 'BUY', amount: 200, usdt: 118.00, entry: 0.59, exit: 0.57, pnl: -4.00, percent: -3.39 }
+            ]
+        };
+
+        function showDayDetails(date) {
+            const detailsTable = document.getElementById('detailsTable');
+            const detailsBody = document.getElementById('detailsBody');
+            const selectedDate = document.getElementById('selectedDate');
+            
+            // Update selected date
+            selectedDate.textContent = date.split('-').reverse().join('.');
+            
+            // Clear existing details
+            detailsBody.innerHTML = '';
+            
+            // Add transaction details
+            const transactions = transactionData[date] || [];
+            transactions.forEach(transaction => {
+                const row = document.createElement('tr');
+                row.className = transaction.pnl >= 0 ? 'profit-row' : 'loss-row';
+                
+                row.innerHTML = `
+                    <td>${transaction.date}</td>
+                    <td><strong>${transaction.symbol}</strong></td>
+                    <td class="${transaction.direction === 'BUY' ? 'direction-buy' : 'direction-sell'}">${transaction.direction}</td>
+                    <td>${transaction.amount}</td>
+                    <td>${transaction.usdt}</td>
+                    <td>${transaction.entry}</td>
+                    <td>${transaction.exit}</td>
+                    <td class="${transaction.pnl >= 0 ? 'pnl-positive' : 'pnl-negative'}">${transaction.pnl >= 0 ? '+' : ''}${transaction.pnl}</td>
+                    <td class="${transaction.pnl >= 0 ? 'pnl-positive' : 'pnl-negative'}">${transaction.percent >= 0 ? '+' : ''}${transaction.percent}%</td>
+                `;
+                
+                detailsBody.appendChild(row);
+            });
+            
+            // Show details table
+            detailsTable.style.display = 'block';
+            
+            // Scroll to details
+            detailsTable.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function setQuickFilter(period) {
+            // Remove active class from all buttons
+            document.querySelectorAll('.quick-filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+            
+            // Apply filter logic here
+            console.log('Quick filter set to:', period);
+        }
+
+        function applyDateFilter() {
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            
+            console.log('Date filter applied:', startDate, 'to', endDate);
+        }
+
+        function exportToCSV() {
+            // Create CSV content
+            let csvContent = "Tarih,İşlem Sayısı,Başarı Oranı,Toplam PnL,Ortalama PnL,En İyi İşlem,En Kötü İşlem\n";
+            
+            // Add sample data
+            csvContent += "18.04.2026,24,67.5%,+456.32,+19.01,+125.50,-23.80\n";
+            csvContent += "17.04.2026,18,55.6%,-89.45,-4.97,+67.20,-45.30\n";
+            csvContent += "16.04.2026,31,71.0%,+789.12,+25.46,+156.80,-34.20\n";
+            
+            // Create download link
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', `sentralyx_rapor_${new Date().toISOString().split('T')[0]}.csv`);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Initialize with today's date
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('endDate').value = today;
+            
+            const weekAgo = new Date();
+            weekAgo.setDate(weekAgo.getDate() - 7);
+            document.getElementById('startDate').value = weekAgo.toISOString().split('T')[0];
+        });
+    </script>
+</body>
+</html>
