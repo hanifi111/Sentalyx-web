@@ -1,65 +1,65 @@
-<footer class="footer mt-auto py-4 bg-dark border-top border-secondary">
+<footer class="footer mt-auto py-5 bg-dark border-top border-secondary">
     <div class="container text-center">
-        <div class="d-flex justify-content-center gap-4 mb-3">
-            <a href="https://t.me/Sentralyx" target="_blank" class="social-btn telegram" title="Telegram">
+        <div class="d-flex justify-content-center align-items-center gap-4 mb-4">
+            <a href="https://t.me/Sentralyx" target="_blank" class="social-box telegram" title="Telegram">
                 <i class="fab fa-telegram-plane"></i>
             </a>
 
-            <a href="https://x.com/Sentralyx" target="_blank" class="social-btn x-twitter" title="X (Twitter)">
-                <i class="fab fa-x-twitter"></i>
+            <a href="https://x.com/Sentralyx" target="_blank" class="social-box x-twitter" title="X (Twitter)">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932 6.064-6.932zm-1.292 19.494h2.039L6.486 3.24H4.298l13.311 17.407z"/>
+                </svg>
             </a>
 
-            <a href="https://www.youtube.com/@Sentralyx" target="_blank" class="social-btn youtube" title="YouTube">
+            <a href="https://www.youtube.com/@Sentralyx" target="_blank" class="social-box youtube" title="YouTube">
                 <i class="fab fa-youtube"></i>
             </a>
 
-            <a href="https://www.instagram.com/sentralyx/" target="_blank" class="social-btn instagram" title="Instagram">
+            <a href="https://www.instagram.com/sentralyx/" target="_blank" class="social-box instagram" title="Instagram">
                 <i class="fab fa-instagram"></i>
             </a>
         </div>
 
-        <p class="text-secondary small mb-0">
-            &copy; 2026 <span class="text-white fw-bold">Sentraly<span style="color: #A855F7;">x</span></span> - Profesyonel Trading Çözümleri
-        </p>
+        <div class="footer-info">
+            <p class="mb-1 text-white opacity-75">
+                &copy; 2026 <span class="fw-bold">Sentraly<span style="color: #A855F7;">x</span></span>
+            </p>
+            <p class="small text-secondary mb-0">Profesyonel Trading Çözümleri - Yazılım Mimari Ekibi</p>
+        </div>
     </div>
 </footer>
 
 <style>
-/* Footer Genel Tasarımı */
-.footer {
-    background-color: #0b0e11 !important; /* Terminal koyuluğu */
-}
+/* Arka Plan Koyu Terminal Rengi */
+.footer { background-color: #0b0e11 !important; }
 
-/* Sosyal Buton Tasarımı */
-.social-btn {
-    width: 45px;
-    height: 45px;
+/* İkon Kutuları (Glassmorphism) */
+.social-box {
+    width: 46px;
+    height: 46px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
     color: #ffffff !important;
     font-size: 1.4rem;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     text-decoration: none !important;
 }
 
-/* Hover Efektleri ve Sentralyx Parlaması */
-.social-btn:hover {
-    transform: translateY(-5px) scale(1.1);
-    border-color: rgba(255, 255, 255, 0.4);
+/* Hover Parlama Efektleri */
+.social-box:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
-.telegram:hover { background: #0088cc; box-shadow: 0 0 20px rgba(0, 136, 204, 0.5); }
-.x-twitter:hover { background: #000000; box-shadow: 0 0 20px rgba(255, 255, 255, 0.2); }
-.youtube:hover { background: #ff0000; box-shadow: 0 0 20px rgba(255, 0, 0, 0.4); }
-.instagram:hover { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); box-shadow: 0 0 20px rgba(220, 39, 67, 0.4); }
+.telegram:hover { background: #0088cc; box-shadow: 0 0 15px rgba(0, 136, 204, 0.4); }
+.x-twitter:hover { background: #000000; box-shadow: 0 0 15px rgba(255, 255, 255, 0.1); }
+.youtube:hover { background: #ff0000; box-shadow: 0 0 15px rgba(255, 0, 0, 0.4); }
+.instagram:hover { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); box-shadow: 0 0 15px rgba(220, 39, 67, 0.4); }
 
-/* İkonların Kesin Görünmesi İçin */
-.fab {
-    display: inline-block !important;
-    visibility: visible !important;
-}
+.social-box svg { fill: #ffffff; transition: fill 0.3s; }
+.social-box:hover svg { fill: #ffffff; }
 </style>
