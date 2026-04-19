@@ -888,88 +888,16 @@
         });
     </script>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <p>&copy; 2026 SENTRALYX - Profesyonel Trading Çözümleri</p>
-                    <div class="small text-secondary">Yazılım Geliştirici: Sentralyx Mimari Ekibi</div>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <div class="d-flex align-items-center justify-content-md-end gap-3 mt-3 mt-md-0">
-                        <!-- Telegram -->
-                        <a href="https://t.me/Sentralyx" target="_blank" class="social-link-footer telegram-link-footer">
-                            <i class="fab fa-telegram"></i>
-                        </a>
-                        <!-- X (Twitter) -->
-                        <a href="https://x.com/Sentralyx" target="_blank" class="social-link-footer x-link-footer">
-                            <i class="fab fa-x-twitter"></i>
-                        </a>
-                        <!-- YouTube -->
-                        <a href="https://youtube.com/@Sentralyx" target="_blank" class="social-link-footer youtube-link-footer">
-                            <i class="fab fa-youtube"></i>
-                        </a>
-                        <!-- Instagram -->
-                        <a href="https://instagram.com/sentralyx/" target="_blank" class="social-link-footer instagram-link-footer">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <div id="footer-container"></div>
 
-    <style>
-        .footer {
-            border-top: 1px solid var(--border-color);
-            padding: 40px 0;
-            color: var(--text-secondary);
-        }
-        
-        /* Footer Social Media Links */
-        .social-link-footer {
-            font-size: 1.5rem;
-            color: var(--text-secondary);
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-        }
-        
-        .social-link-footer:hover {
-            transform: translateY(-3px);
-        }
-        
-        /* Telegram - Original Blue */
-        .telegram-link-footer:hover {
-            color: #0088cc;
-            filter: drop-shadow(0 0 10px rgba(0, 136, 204, 0.5));
-        }
-        
-        /* X (Twitter) - Electric Blue */
-        .x-link-footer:hover {
-            color: #1DA1F2;
-            filter: drop-shadow(0 0 10px rgba(29, 161, 242, 0.5));
-        }
-        
-        /* YouTube - Classic Red */
-        .youtube-link-footer:hover {
-            color: #ff0000;
-            filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.5));
-        }
-        
-        /* Instagram - Pink-Purple Gradient */
-        .instagram-link-footer:hover {
-            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            filter: drop-shadow(0 0 10px rgba(228, 64, 95, 0.5));
-        }
-    </style>
+    <script>
+        // Load footer from components/footer.html
+        fetch('../components/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            })
+            .catch(error => console.error('Footer yuklenemedi:', error));
+    </script>
 </body>
 </html>
