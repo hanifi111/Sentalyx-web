@@ -1,17 +1,4 @@
 {
-  "version_info": {
-    "current_version": "1.0.0",
-    "force_update": false,
-    "download_url": "https://www.sentralyx.com/download"
-  },
-  "announcement": {
-    "id": 1,
-    "display_text": "Sentralyx v1.0 Yayında! Market Rejimi: Yatay. Tüm risk kullanıcıya aittir.",
-    "color": "cyan",
-    "is_active": true
-  },
-  "status_check": {
-    "server_time": "2026-04-20T06:00:00Z",
-    "maintenance_mode": false
-  }
+  "announcement": "Sentralyx v1.0 Yayında! Market Rejimi: Yatay. Tüm risk kullanıcıya aittir.",
+  "url": "https://www.sentralyx.com"
 }
