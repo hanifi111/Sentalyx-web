@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trading System Configuration | API Integration & Risk Management Settings</title>
-    <meta name="description" content="Comprehensive trading system configuration with API integration, automated risk management settings, and quantitative trading parameters for optimal system performance.">
+    <title>Trading Sistemi Yapılandırması | API Entegrasyonu & Risk Yönetimi Ayarları</title>
+    <meta name="description" content="API entegrasyonu, otomatik risk yönetimi ve nicel parametrelerle; optimum performans için kapsamlı trading sistemi yapılandırması.">
     <link rel="icon" type="image/x-icon" href="../sentralyx_favicon.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -360,8 +360,8 @@
     
     <main class="settings-container">
         <div class="text-center mb-4">
-            <h1 class="text-main">Trading System Configuration</h1>
-            <p class="text-secondary">API integration and automated risk management settings for optimal system performance</p>
+            <h1 class="text-main">Trading Sistemi Yapılandırması</h1>
+            <p class="text-secondary">Optimum performans için API entegrasyonu ve otomatik risk yönetimi ayarları</p>
         </div>
         <h2 class="section-title">
             <i class="fas fa-cog"></i>Ayarlar
@@ -476,13 +476,13 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label class="form-label">Aktif Strateji</label>
-                        <select class="form-select">
-                            <option>Majority Consensus</option>
-                            <option>Scoring System</option>
-                            <option>Full Consensus</option>
-                        </select>
-                    </div>
+	                        <label class="form-label">Aktif Strateji</label>
+	                        <select class="form-select">
+	                            <option value="Majority Consensus">Çoğunluk Onayı</option>
+	                            <option value="Scoring System">Skorlama Sistemi</option>
+	                            <option value="Full Consensus">Tam Mutabakat</option>
+	                        </select>
+	                    </div>
                 </div>
             </div>
         </div>
@@ -926,7 +926,10 @@
     <script>
         // Load footer from components/footer.html
         fetch('../components/footer.html')
-            .then(response => response.text())
+            .then(async (response) => {
+                const buffer = await response.arrayBuffer();
+                return new TextDecoder('utf-8').decode(buffer);
+            })
             .then(data => {
                 document.getElementById('footer-container').innerHTML = data;
             })

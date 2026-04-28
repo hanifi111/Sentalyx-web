@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Sentralyx | Quantitative Trading Platform with Market Regime Analysis & Portfolio Backtesting</title>
-    <meta name="description" content="Sentralyx delivers advanced quantitative trading solutions with real-time market scanning, algorithmic strategy building, automated risk management, and comprehensive portfolio backtesting for professional traders.">
-    <meta name="keywords" content="trading terminal, algoritmik ticaret, sentralyx, teknik analiz, mtf onay, borsa indikatörleri, backtesting, quantitative trading, market regime analysis, portfolio backtesting, algorithmic strategy building, automated risk management">
+    <title>Sentralyx | Piyasa Rejim Analizi ve Portföy Backtesting ile Nicel Trading Platformu</title>
+    <meta name="description" content="Sentralyx; gerçek zamanlı piyasa tarama, algoritmik strateji oluşturma, otomatik risk yönetimi ve kapsamlı portföy backtesting ile profesyonel trader’lar için ileri seviye nicel trading çözümleri sunar.">
+    <meta name="keywords" content="trading terminal, algoritmik ticaret, sentralyx, teknik analiz, mtf onay, borsa indikatörleri, backtesting, nicel trading, piyasa rejim analizi, portföy backtesting, strateji oluşturma, otomatik risk yönetimi">
 
     <!-- JSON-LD Software Schema for SEO -->
     <script type="application/ld+json">
@@ -14,17 +14,17 @@
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
         "name": "Sentralyx",
-        "description": "Professional quantitative trading terminal with real-time market scanning, algorithmic strategy building, automated risk management, and comprehensive trade reporting",
+        "description": "Gerçek zamanlı piyasa tarama, algoritmik strateji oluşturma, otomatik risk yönetimi ve kapsamlı işlem raporlama sunan profesyonel nicel trading terminali",
         "applicationCategory": "FinanceApplication",
         "operatingSystem": ["Web", "Windows", "macOS", "Linux"],
         "featureList": [
-            "Real-time Market Scanning",
-            "Algorithmic Strategy Building", 
-            "Automated Risk Management",
-            "Professional Trade Reporting",
-            "Multi-Timeframe Analysis",
-            "Portfolio Backtesting",
-            "Market Regime Analysis"
+            "Gerçek Zamanlı Piyasa Tarama",
+            "Algoritmik Strateji Oluşturma",
+            "Otomatik Risk Yönetimi",
+            "Profesyonel İşlem Raporları",
+            "Çoklu Zaman Dilimi Analizi (MTF)",
+            "Portföy Backtesting",
+            "Piyasa Rejim Analizi"
         ],
         "url": "https://www.sentralyx.com/",
         "author": {
@@ -39,7 +39,7 @@
     }
     </script>
 
-    <meta property="og:title" content="Sentralyx Trading Terminal">
+    <meta property="og:title" content="Sentralyx Trading Terminali">
     <meta property="og:description" content="Hız ve hassasiyetle tasarlanmış trading platformu. Stratejilerini test et, piyasayı domine et.">
     <meta property="og:url" content="https://www.sentralyx.com/">
     <meta property="og:type" content="website">
@@ -450,7 +450,7 @@
                 <div class="col-md-4">
                     <div class="terminal-feature-card">
                         <i class="fas fa-search feature-icon"></i>
-                        <h4 class="feature-title">Market Scanner</h4>
+                        <h4 class="feature-title">Piyasa Tarayıcı</h4>
                         <p class="feature-description">Piyasadaki yüzlerce pariteyi aynı anda, belirlediğiniz teknik kriterlere göre tarayın. MTF onaylı ile sinyal kalitesini en üst seviyeye taşıyın.</p>
                         <a href="scanner/" class="feature-action-btn">
                             <i class="fas fa-arrow-right me-2"></i>İncele
@@ -491,7 +491,7 @@
                     <div class="terminal-feature-card">
                         <i class="fas fa-layer-group feature-icon"></i>
                         <h4 class="feature-title">Strateji Yönetimi</h4>
-                        <p class="feature-description">Majority, Scoring ve Full Consensus yöntemleriyle kendi karar mekanizmanızı kurun. Wizard ile hızlı strateji oluşturun.</p>
+                        <p class="feature-description">Çoğunluk, Skorlama ve Tam Mutabakat yöntemleriyle kendi karar mekanizmanızı kurun. Wizard ile hızlı strateji oluşturun.</p>
                         <a href="strategies/" class="feature-action-btn">
                             <i class="fas fa-arrow-right me-2"></i>Detaylı Bilgi
                         </a>
@@ -556,7 +556,10 @@
     <script>
         // Load footer from components/footer.html
         fetch('components/footer.html')
-            .then(response => response.text())
+            .then(async (response) => {
+                const buffer = await response.arrayBuffer();
+                return new TextDecoder('utf-8').decode(buffer);
+            })
             .then(data => {
                 document.getElementById('footer-container').innerHTML = data;
             })

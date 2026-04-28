@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Active Positions Management | Real-Time P&L Tracking & Automated Risk Management</title>
-    <meta name="description" content="Real-time active position management with automated P&L tracking, risk monitoring, and quantitative trading controls for professional portfolio management.">
+    <title>Açık Pozisyon Yönetimi | Anlık P&L Takibi & Otomatik Risk Yönetimi</title>
+    <meta name="description" content="Profesyonel portföy yönetimi için anlık açık pozisyon yönetimi; otomatik P&L takibi, risk izleme ve nicel kontrol mekanizmaları.">
     <link rel="icon" type="image/x-icon" href="../sentralyx_favicon.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -325,7 +325,7 @@
     
     <main class="active-positions-container">
         <div class="text-center mb-4">
-            <h1 class="text-main">Active Positions Management</h1>
+            <h1 class="text-main">Açık Pozisyon Yönetimi</h1>
             <p class="text-secondary">Real-time P&L tracking and automated risk management for professional portfolio control</p>
         </div>
         <!-- Summary Cards -->
@@ -654,7 +654,10 @@
     <script>
         // Load footer from components/footer.html
         fetch('../components/footer.html')
-            .then(response => response.text())
+            .then(async (response) => {
+                const buffer = await response.arrayBuffer();
+                return new TextDecoder('utf-8').decode(buffer);
+            })
             .then(data => {
                 document.getElementById('footer-container').innerHTML = data;
             })

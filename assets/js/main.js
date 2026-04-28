@@ -27,7 +27,9 @@ async function loadHeader() {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         
-        const headerContent = await response.text();
+        // Force UTF-8 decoding to avoid Turkish character mojibake on some hosts (e.g., when charset is omitted)
+        const buffer = await response.arrayBuffer();
+        const headerContent = new TextDecoder('utf-8').decode(buffer);
         headerElement.innerHTML = headerContent;
         
         // Re-initialize Bootstrap components after header load
