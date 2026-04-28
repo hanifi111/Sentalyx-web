@@ -86,23 +86,30 @@
         }
 
         /* Screenshot Styling */
-        .terminal-img {
+        .terminal-img-wrapper {
+            position: relative;
+            display: inline-block;
+            margin: 30px auto 0;
+            max-width: 1000px;
+            width: 100%;
+            background: var(--bg-dark);
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 12px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            transition: transform 0.3s ease;
-            max-width: 80vw;
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-            background: var(--panel-dark);
-            padding: 12px;
-            margin: 30px auto 0;
-            position: relative;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+            padding: 10px;
             overflow: hidden;
         }
         
-        .terminal-img::after {
+        .terminal-img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 8px;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        
+        .terminal-img-wrapper::after {
             content: '';
             position: absolute;
             bottom: 0;
@@ -113,16 +120,14 @@
             pointer-events: none;
         }
         
-        .terminal-img:hover {
+        .terminal-img-wrapper:hover {
             transform: scale(1.02);
             border-color: rgba(255,255,255,0.2);
-            box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+            box-shadow: 0 35px 70px rgba(0,0,0,0.5);
         }
         
-        .terminal-img-wrapper {
-            position: relative;
-            display: inline-block;
-            margin: 30px auto 0;
+        .terminal-img-wrapper:hover .terminal-img {
+            transform: scale(1.01);
         }
 
         /* Sections */
@@ -299,18 +304,19 @@
                 margin-top: 1.5rem;
             }
             
-            .terminal-img {
+            .terminal-img-wrapper {
                 max-width: 95vw;
-                height: auto;
+                padding: 8px;
                 margin: 30px auto 0;
-                padding: 10px;
-                background: var(--panel-dark);
-                border: 1px solid rgba(255,255,255,0.1);
             }
             
-            .terminal-img::after {
+            .terminal-img-wrapper::after {
                 height: 60px;
                 background: linear-gradient(to bottom, transparent, rgba(11, 17, 27, 0.9));
+            }
+            
+            .terminal-img {
+                border-radius: 6px;
             }
             
             /* Sections Mobile */
@@ -430,7 +436,9 @@
             <a href="scanner/" class="hero-main-btn">
                 <i class="fas fa-rocket me-2"></i>Terminali Keşfet
             </a>
-            <img src="scanner.png" alt="Sentralyx Scanner" class="terminal-img">
+            <div class="terminal-img-wrapper">
+                <img src="scanner.png" alt="Sentralyx Scanner" class="terminal-img">
+            </div>
         </div>
     </header>
 
