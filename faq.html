@@ -196,6 +196,23 @@
 
     <header id="main-header"></header>
 
+    <!-- Legal Disclaimer -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="alert alert-warning" style="background: rgba(255, 193, 7, 0.1); border: 1px solid #ffc107; border-radius: 10px; padding: 20px;">
+                <div class="d-flex align-items-start">
+                    <i class="fas fa-exclamation-triangle me-3" style="color: #ffc107; font-size: 1.5rem; margin-top: 2px;"></i>
+                    <div>
+                        <h5 class="mb-2" style="color: #ffc107; font-weight: 600;">Yasal Uyarı</h5>
+                        <p class="mb-0 text-secondary">
+                            Sentralyx bir trading terminalidir, yatırım danışmanlığı hizmeti vermez. Burada yer alan bilgiler yalnızca yazılımın teknik özelliklerini açıklamak amacıyla sunulmuştur. Yatırım tavsiyesi niteliği taşımaz. Finansal kararlarınızdan yalnızca siz sorumlusunuz. Kripto para piyasaları yüksek risk içerir.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="faq-hero">
         <div class="container">
             <div class="text-center">
@@ -401,33 +418,35 @@
             <div class="faq-category">
                 <div class="category-header">
                     <div class="category-icon">
-                        <i class="fas fa-chart-line"></i>
+                        <i class="fas fa-cogs"></i>
                     </div>
-                    <h2 class="category-title">Kullanım & Strateji</h2>
+                    <h2 class="category-title">Sistem Konfigürasyonu & Teknik Parametreler</h2>
                 </div>
                 
                 <div class="accordion" id="usageAccordion">
                     <div class="accordion-item">
                         <h2 class="accordion-header">
                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#usage1">
-                                Hangi zaman dilimlerini kullanmalıyım?
+                                Sentralyx zaman dilimi konfigürasyonları nelerdir?
                             </button>
                         </h2>
                         <div id="usage1" class="accordion-collapse collapse show" data-bs-parent="#usageAccordion">
                             <div class="accordion-body">
-                                <p>Sentralyx <strong>Multi-Timeframe (MTF)</strong> analiz yeteneği sunar:</p>
+                                <p>Sentralyx <strong>Multi-Timeframe (MTF)</strong> analiz motoru şu teknik konfigürasyonları destekler:</p>
                                 
                                 <ul>
-                                    <li><strong>Scalping (1m, 5m):</strong> Hızlı giriş/çıkışlar için uygun, ancak yüksek dikkat gerektirir.</li>
-                                    <li><strong>Intraday (15m, 1h):</strong> En dengeli yaklaşım, hem sinyal kalitesi hem de işlem frekansı açısından ideal.</li>
-                                    <li><strong>Swing (4h, 1d):</strong> Daha uzun vadeli stratejiler için, daha az stresli.</li>
+                                    <li><strong>Scalping Modülleri (1m, 5m):</strong> Yüksek frekanslı veri işleme için optimize edilmiş, düşük gecikmeli analiz.</li>
+                                    <li><strong>Intraday Modülleri (15m, 1h):</strong> Dengeli sinyal yoğunluğu ve işlem frekansı için standart konfigürasyon.</li>
+                                    <li><strong>Swing Modülleri (4h, 1d):</strong> Uzun vadeli trend analizleri için yüksek doğruluklu hesaplamalar.</li>
                                 </ul>
                                 
-                                <p><strong>MTF Onay Sistemi:</strong> Birden fazla zaman dilimindeki sinyallerin uyumu, işlem kararının gücünü artırır.</p>
+                                <p><strong>MTF Onay Algoritması:</strong> Birden fazla zaman dilimindeki sinyallerin matematiksel korelasyonu, işlem kararının güven skorunu hesaplar.</p>
                                 
                                 <div class="stability-highlight">
-                                    <strong>📊 Öneri:</strong> Yeni başlayanlar için 15m ve 1h zaman dilimleri kombinasyonu tavsiye edilir.
+                                    <strong>📊 Teknik Not:</strong> Sistem varsayılan olarak 15m ve 1h modüllerini senkronize çalıştırır.
                                 </div>
+                                
+                                <p class="text-muted mt-3"><em>Bu ayarlar piyasa koşullarına göre değişkenlik gösterir ve kullanıcının sorumluluğundadır.</em></p>
                             </div>
                         </div>
                     </div>
@@ -435,22 +454,24 @@
                     <div class="accordion-item">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#usage2">
-                                Risk yönetimi nasıl ayarlanmalı?
+                                Risk yönetimi parametreleri nasıl yapılandırılır?
                             </button>
                         </h2>
                         <div id="usage2" class="accordion-collapse collapse" data-bs-parent="#usageAccordion">
                             <div class="accordion-body">
-                                <p>Profesyonel risk yönetimi için şu parametreleri öneriyoruz:</p>
+                                <p>Sentralyx risk yönetimi motoru için teknik literatürde kabul görmüş parametre aralıkları:</p>
                                 
                                 <ul>
-                                    <li><strong>Stop Loss:</strong> %1.5 - %3.0 (piyasa volatilitesine göre)</li>
-                                    <li><strong>Take Profit:</strong> %3.0 - %6.0 (Risk/Oran en az 1:2)</li>
-                                    <li><strong>Position Size:</strong> Toplam sermayenin %2-5'i</li>
-                                    <li><strong>Daily Loss Limit:</strong> Günlük maksimum %5 kayıp</li>
-                                    <li><strong>Max Duration:</strong> 240 dakika (4 saat)</li>
+                                    <li><strong>Stop Loss Threshold:</strong> %1.5 - %3.0 (piyasa volatilitesi indeksine göre otomatik ayarlanabilir)</li>
+                                    <li><strong>Take Profit Threshold:</strong> %3.0 - %6.0 (Risk/Oran katsayısı min. 1:2)</li>
+                                    <li><strong>Position Size Algorithm:</strong> Toplam sermayenin %2-5'i (dinamik hesaplama)</li>
+                                    <li><strong>Daily Loss Limit:</strong> Günlük maksimum %5 sermaye koruma sınırı</li>
+                                    <li><strong>Max Duration:</strong> 240 dakika (4 saat) otomatik kapanış zamanlayıcısı</li>
                                 </ul>
                                 
-                                <p><strong>Önemli Not:</strong> Asla tek bir işlemde toplam sermayenizin %10'undan fazla riske atmayın.</p>
+                                <p><strong>Sistem Validasyonu:</strong> Risk parametreleri her işlem öncesinde Pre-Trade Validation katmanı tarafından kontrol edilir.</p>
+                                
+                                <p class="text-muted mt-3"><em>Bu ayarlar piyasa koşullarına göre değişkenlik gösterir ve kullanıcının sorumluluğundadır.</em></p>
                             </div>
                         </div>
                     </div>
@@ -458,36 +479,38 @@
                     <div class="accordion-item">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#usage3">
-                                Hangi indikatörler daha etkili?
+                                Sentralyx ile Kullanılabilen Teknik Analiz Modülleri
                             </button>
                         </h2>
                         <div id="usage3" class="accordion-collapse collapse" data-bs-parent="#usageAccordion">
                             <div class="accordion-body">
-                                <p>Strateji tipinize göre farklı indikatör kombinasyonları etkili olabilir:</p>
+                                <p>Sentralyx motorunda entegre edilen teknik analiz modüllerinin matematiksel karşılıkları:</p>
                                 
-                                <p><strong>Trend Takibi:</strong></p>
+                                <p><strong>Trend Analiz Modülleri:</strong></p>
                                 <ul>
-                                    <li>MACD (12, 26, 9) - Trend yönü ve momentum</li>
-                                    <li>Moving Averages (20, 50) - Destek/direnç seviyeleri</li>
-                                    <li>ADX - Trend gücü ölçümü</li>
+                                    <li><span class="technical-term">MACD (12, 26, 9)</span> - Hareketli ortalama yakınsama/ıraksama algoritması</li>
+                                    <li><span class="technical-term">Moving Averages (20, 50)</span> - Üstel ve basit hareketli ortalama hesaplama motoru</li>
+                                    <li><span class="technical-term">ADX</span> - Average Directional Index trend gücü ölçüm algoritması</li>
                                 </ul>
                                 
-                                <p><strong>Mean Reversion:</strong></p>
+                                <p><strong>Mean Reversion Modülleri:</strong></p>
                                 <ul>
-                                    <li>RSI (14) - Aşırı alım/satım bölgeleri</li>
-                                    <li>Bollinger Bands - Fiyat kanalları</li>
-                                    <li>Stochastic - Momentum osilatörü</li>
+                                    <li><span class="technical-term">RSI (14)</span> - Relative Strength Index osilatörü (30/70 threshold)</li>
+                                    <li><span class="technical-term">Bollinger Bands</span> - Standart sapma tabanlı fiyat kanalı hesaplaması</li>
+                                    <li><span class="technical-term">Stochastic Oscillator</span> - %K ve %D çizgileri momentum analizi</li>
                                 </ul>
                                 
-                                <p><strong>Volume Analysis:</strong></p>
+                                <p><strong>Volume Analiz Modülleri:</strong></p>
                                 <ul>
-                                    <li>Volume Profile - Fiyat/volume ilişkisi</li>
-                                    <li>On-Balance Volume - Akış yönü</li>
+                                    <li><span class="technical-term">Volume Profile</span> - Fiyat/volume dağılımı histogram algoritması</li>
+                                    <li><span class="technical-term">On-Balance Volume</span> - Akış yönü hesaplama motoru</li>
                                 </ul>
                                 
                                 <div class="stability-highlight">
-                                    <strong>💡 İpucu:</strong> İndikatörleri tek başına değil, birbirini doğrulayacak şekilde kullanın.
+                                    <strong>💡 Teknik Not:</strong> Modüller tek başına değil, sinyal korelasyon matrisi üzerinden çalışır.
                                 </div>
+                                
+                                <p class="text-muted mt-3"><em>Bu ayarlar piyasa koşullarına göre değişkenlik gösterir ve kullanıcının sorumluluğundadır.</em></p>
                             </div>
                         </div>
                     </div>
@@ -495,30 +518,49 @@
                     <div class="accordion-item">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#usage4">
-                                Backtest nasıl yapılır?
+                                Sentralyx backtest motoru nasıl çalışır?
                             </button>
                         </h2>
                         <div id="usage4" class="accordion-collapse collapse" data-bs-parent="#usageAccordion">
                             <div class="accordion-body">
-                                <p>Etkili bir backtest için şu adımları izleyin:</p>
+                                <p>Sentralyx backtest motoru için teknik validasyon prosedürü:</p>
                                 
                                 <ol>
-                                    <li><strong>Veri Hazırlığı:</strong> En az 6 aylık geçmiş veri kullanın.</li>
-                                    <li><strong>Strateji Tanımı:</strong> Giriş/çıkış kurallarını net bir şekilde belirleyin.</li>
-                                    <li><strong>Parametre Optimizasyonu:</strong> Farklı parametre setlerini test edin.</li>
-                                    <li><strong>Walk-Forward Test:</strong> Optimizasyon sonrası genişletilmiş periyotta test.</li>
-                                    <li><strong>Risk Analizi:</strong> Maximum drawdown ve sharpe ratio hesaplayın.</li>
+                                    <li><strong>Veri Seti Hazırlığı:</strong> Minimum 6 aylık OHLCV veri formatı (tick-by-tick destekli)</li>
+                                    <li><strong>Strateji Tanımlama:</strong> Giriş/çıkış kurallarının algoritmik tanımlanması</li>
+                                    <li><strong>Parametre Optimizasyonu:</strong> Grid search algoritması ile parametre uzayında tarama</li>
+                                    <li><strong>Walk-Forward Validasyon:</strong> Out-of-sample test ile overfitting kontrolü</li>
+                                    <li><strong>Risk Metrikleri:</strong> Maximum drawdown, Sharpe ratio, Sortino ratio hesaplamaları</li>
                                 </ol>
                                 
-                                <p><strong>Performans Metrikleri:</strong></p>
+                                <p><strong>Performans Metrikleri (Teknik Referans):</strong></p>
                                 <ul>
-                                    <li>Win Rate: %60+ (ideal)</li>
-                                    <li>Profit Factor: 1.5+ (ideal)</li>
-                                    <li>Max Drawdown: %20 altı</li>
-                                    <li>Sharpe Ratio: 1.0+ (ideal)</li>
+                                    <li>Win Rate: %60+ (istatistiksel anlamlılık eşiği)</li>
+                                    <li>Profit Factor: 1.5+ (kar/zarar oranı)</li>
+                                    <li>Max Drawdown: %20 altı (risk toleransı)</li>
+                                    <li>Sharpe Ratio: 1.0+ (risk ayarlı getiri)</li>
                                 </ul>
+                                
+                                <p class="text-muted mt-3"><em>Bu ayarlar piyasa koşullarına göre değişkenlik gösterir ve kullanıcının sorumluluğundadır.</em></p>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Legal Disclaimer -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="alert alert-warning" style="background: rgba(255, 193, 7, 0.1); border: 1px solid #ffc107; border-radius: 10px; padding: 20px;">
+                <div class="d-flex align-items-start">
+                    <i class="fas fa-exclamation-triangle me-3" style="color: #ffc107; font-size: 1.5rem; margin-top: 2px;"></i>
+                    <div>
+                        <h5 class="mb-2" style="color: #ffc107; font-weight: 600;">Yasal Uyarı</h5>
+                        <p class="mb-0 text-secondary">
+                            Sentralyx bir trading terminalidir, yatırım danışmanlığı hizmeti vermez. Burada yer alan bilgiler yalnızca yazılımın teknik özelliklerini açıklamak amacıyla sunulmuştur. Yatırım tavsiyesi niteliği taşımaz. Finansal kararlarınızdan yalnızca siz sorumlusunuz. Kripto para piyasaları yüksek risk içerir.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -537,6 +579,23 @@
                     <i class="fab fa-telegram-plane"></i>
                     Telegram'dan Ulaşın
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Legal Disclaimer -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="alert alert-warning" style="background: rgba(255, 193, 7, 0.1); border: 1px solid #ffc107; border-radius: 10px; padding: 20px;">
+                <div class="d-flex align-items-start">
+                    <i class="fas fa-exclamation-triangle me-3" style="color: #ffc107; font-size: 1.5rem; margin-top: 2px;"></i>
+                    <div>
+                        <h5 class="mb-2" style="color: #ffc107; font-weight: 600;">Yasal Uyarı</h5>
+                        <p class="mb-0 text-secondary">
+                            Sentralyx bir trading terminalidir, yatırım danışmanlığı hizmeti vermez. Burada yer alan bilgiler yalnızca yazılımın teknik özelliklerini açıklamak amacıyla sunulmuştur. Yatırım tavsiyesi niteliği taşımaz. Finansal kararlarınızdan yalnızca siz sorumlusunuz. Kripto para piyasaları yüksek risk içerir.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
