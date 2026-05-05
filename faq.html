@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Sentralyx | Sıkça Sorulan Sorular - Teknik Destek ve Kullanım Rehberi</title>
+    <meta name="description" content="Sentralyx trading terminali hakkında sıkça sorulan sorular. Güvenlik, teknik stabilite, Thread Watchdog, Atomic Write, HWID şifreleme ve daha fazlası.">
+    <meta name="keywords" content="sentralyx faq, sıkça sorulan sorular, güvenlik, teknik destek, thread watchdog, atomic write, hwid şifreleme, gtc emirleri">
+
+    <link rel="icon" type="image/x-icon" href="sentralyx_favicon.ico">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <style>
+        /* FAQ Page Specific Styles */
+        .faq-hero {
+            padding: 120px 0 60px;
+            background: radial-gradient(circle at top right, rgba(47, 177, 127, 0.12), transparent);
+            position: relative;
+        }
+        
+        .faq-section {
+            padding: 80px 0;
+        }
+        
+        .faq-category {
+            background: var(--panel-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .category-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--accent-blue);
+        }
+        
+        .category-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--signal-buy));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+            margin-right: 20px;
+        }
+        
+        .category-title {
+            color: var(--text-main);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+        }
+        
+        .accordion-item {
+            background: var(--panel-dark);
+            border: 1px solid var(--border-color);
+            margin-bottom: 10px;
+            border-radius: 10px !important;
+            overflow: hidden;
+        }
+        
+        .accordion-button {
+            background: var(--panel-dark);
+            color: var(--text-main);
+            border: none;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .accordion-button:not(.collapsed) {
+            background: linear-gradient(135deg, var(--accent-blue), var(--signal-buy));
+            color: white;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .accordion-button:focus {
+            box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
+            border: none;
+        }
+        
+        .accordion-body {
+            background: var(--panel-dark);
+            color: var(--text-secondary);
+            padding: 25px;
+            line-height: 1.7;
+        }
+        
+        .technical-term {
+            background: rgba(52, 152, 219, 0.1);
+            border: 1px solid var(--accent-blue);
+            border-radius: 6px;
+            padding: 3px 8px;
+            color: var(--accent-blue);
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+        
+        .security-highlight {
+            background: rgba(231, 76, 60, 0.1);
+            border-left: 4px solid #e74c3c;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .stability-highlight {
+            background: rgba(46, 204, 113, 0.1);
+            border-left: 4px solid #2ecc71;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .cta-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, rgba(47, 177, 127, 0.1), rgba(52, 152, 219, 0.1));
+            text-align: center;
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, var(--accent-blue), var(--signal-buy));
+            color: white;
+            padding: 15px 40px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 25px rgba(52, 152, 219, 0.4);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(52, 152, 219, 0.5);
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .faq-hero {
+                padding: 100px 0 40px;
+            }
+            
+            .faq-section {
+                padding: 60px 0;
+            }
+            
+            .faq-category {
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+            
+            .category-header {
+                margin-bottom: 20px;
+            }
+            
+            .category-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+                margin-right: 15px;
+            }
+            
+            .category-title {
+                font-size: 1.2rem;
+            }
+            
+            .accordion-button {
+                padding: 15px;
+                font-size: 0.9rem;
+            }
+            
+            .accordion-body {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="main-header"></header>
+
+    <section class="faq-hero">
+        <div class="container">
+            <div class="text-center">
+                <h1 class="display-3 mb-4">Sıkça Sorulan Sorular</h1>
+                <p class="lead text-secondary mb-5">
+                    Sentralyx trading terminali hakkında teknik ve operasyonel sorularınızın cevapları. 
+                    Güvenlik, stabilite ve kullanım rehberi.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <div class="container">
+            
+            <!-- Güvenlik & Gizlilik Kategorisi -->
+            <div class="faq-category">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h2 class="category-title">Güvenlik & Gizlilik</h2>
+                </div>
+                
+                <div class="accordion" id="securityAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#security1">
+                                İnternetim koparsa pozisyonlarım ne olur?
+                            </button>
+                        </h2>
+                        <div id="security1" class="accordion-collapse collapse show" data-bs-parent="#securityAccordion">
+                            <div class="accordion-body">
+                                <p>İnternet bağlantınız kesildiğinde pozisyonlarınız tamamen güvende kalır. Sentralyx, <span class="technical-term">GTC Emirleri</span> (Good Till Canceled) ve <span class="technical-term">Server-Side Protection</span> prensibiyle çalışır:</p>
+                                
+                                <div class="security-highlight">
+                                    <strong>✅ SL/TP Koruma:</strong> Stop Loss ve Take Profit emirleri doğrudan borsa sunucusunda saklanır ve internet bağlantınız olsa da olmasa da aktif kalır.
+                                </div>
+                                
+                                <ul>
+                                    <li><strong>SL (Stop Loss):</strong> Fiyat belirlediğiniz stop seviyesine ulaştığında otomatik olarak pozisyon kapanır.</li>
+                                    <li><strong>TP (Take Profit):</strong> Hedef fiyata ulaşıldığında kârınız realize edilir.</li>
+                                    <li><strong>Global Stop:</strong> Acil durumlarda tüm pozisyonları güvenli bir şekilde kapatabilirsiniz.</li>
+                                </ul>
+                                
+                                <p><strong>Önemli:</strong> İnternet kesintisi sırasında yeni emir gönderilemez (güvenlik önlemi), ancak mevcut pozisyonlarınız sunucu tarafında korunur.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#security2">
+                                API anahtarlarım nasıl korunuyor?
+                            </button>
+                        </h2>
+                        <div id="security2" class="accordion-collapse collapse" data-bs-parent="#securityAccordion">
+                            <div class="accordion-body">
+                                <p>API anahtarlarınız <span class="technical-term">HWID şifreleme</span> ile maksimum güvenlikte korunur:</p>
+                                
+                                <div class="security-highlight">
+                                    <strong>🔐 Çift Katmanlı Şifreleme:</strong> Donanım kimliği (HWID) ve Fernet simetrik şifreleme kombinasyonu.
+                                </div>
+                                
+                                <ul>
+                                    <li><strong>HWID Bağlılığı:</strong> Her lisans sadece belirli bir donanıma özeldir. Farklı bir makinede çalışmaz.</li>
+                                    <li><strong>Lokal Depolama:</strong> API anahtarları hiçbir şekilde buluta veya üçüncü parti sunuculara gönderilmez.</li>
+                                    <li><strong>Fernet Şifreleme:</strong> AES-128 tabanlı, URL-güvenli şifreleme standardı kullanılır.</li>
+                                    <li><strong>Regülatör Uyumu:</strong> GDPR ve KVKK gibi veri koruma yasalarına tam uyum sağlar.</li>
+                                </ul>
+                                
+                                <p><strong>Ek Güvenlik:</strong> API anahtarlarınız sadece sizin makinenizin <span class="technical-term">HWID</span> ile çözülebilir, bu da yetkisiz erişimi imkansız hale getirir.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#security3">
+                                Verilerim bulutta saklanıyor mu?
+                            </button>
+                        </h2>
+                        <div id="security3" class="accordion-collapse collapse" data-bs-parent="#securityAccordion">
+                            <div class="accordion-body">
+                                <p><strong>Hayır.</strong> Sentralyx <strong>Privacy-First</strong> tasarım prensibiyle çalışır:</p>
+                                
+                                <ul>
+                                    <li><strong>Strateji Verileri:</strong> Kâr stratejileriniz ve indikatör ayarlarınız sadece lokalde saklanır.</li>
+                                    <li><strong>İşlem Geçmişi:</strong> Backtest sonuçları ve optimizasyon verileri gizli kalır.</li>
+                                    <li><strong>Rakip Koruma:</strong> Algoritmik trading mantığınız aracı kurumlara veya rakiplere sızdırılamaz.</li>
+                                    <li><strong>Veri Transferi:</strong> Kritik veriler hiçbir şekilde internet üzerinden gönderilmez.</li>
+                                </ul>
+                                
+                                <div class="security-highlight">
+                                    <strong>🛡️ Sıfır Aracı Riski:</strong> Tüm kritik işlemler ve veriler lokalde tutularak maksimum güvenlik sağlanır.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Teknik Stabilite Kategorisi -->
+            <div class="faq-category">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h2 class="category-title">Teknik Stabilite (Self-Healing)</h2>
+                </div>
+                
+                <div class="accordion" id="stabilityAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#stability1">
+                                Sistem bir hata durumunda kendini nasıl toparlıyor?
+                            </button>
+                        </h2>
+                        <div id="stability1" class="accordion-collapse collapse show" data-bs-parent="#stabilityAccordion">
+                            <div class="accordion-body">
+                                <p>Sentralyx, <span class="technical-term">ThreadWatchdog</span> sistemi ile kendi kendini iyileştirme yeteneğine sahiptir:</p>
+                                
+                                <div class="stability-highlight">
+                                    <strong>🔄 7/24 Otomatik İzleme:</strong> Tüm kritik thread'ler 30 saniye arayla kontrol edilir.
+                                </div>
+                                
+                                <ul>
+                                    <li><strong>Heartbeat Kontrolü:</strong> Scanner thread'i için özel heartbeat sistemi, 60 saniye veri gelmezse "frozen" alarmı.</li>
+                                    <li><strong>Otomatik Restart:</strong> Çökmüş thread tespit edilirse otomatik olarak yeniden başlatılır.</li>
+                                    <li><strong>Maksimum Deneme:</strong> Her thread için maksimum 3 restart denemesi hakkı vardır.</li>
+                                    <li><strong>State-Safe:</strong> Restart sırasında pozisyon verileri ve strateji durumu korunur.</li>
+                                </ul>
+                                
+                                <p><strong>Self-Healing Katmanları:</strong></p>
+                                <ol>
+                                    <li><strong>Pre-Trade Validation:</strong> Bakiye kontrolü, risk analizi, maksimum pozisyon limiti.</li>
+                                    <li><strong>Real-Time Monitoring:</strong> Fiyat spike tespiti, anomali tespiti, P&L takibi.</li>
+                                    <li><strong>Emergency Protocols:</strong> Global stop mechanism, force close capability.</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#stability2">
+                                Dosya bozulmalarına karşı bir önlem var mı?
+                            </button>
+                        </h2>
+                        <div id="stability2" class="accordion-collapse collapse" data-bs-parent="#stabilityAccordion">
+                            <div class="accordion-body">
+                                <p>Evet, <span class="technical-term">Atomic Write</span> I/O garantisi ile dosya bütünlüğü sağlanır:</p>
+                                
+                                <div class="stability-highlight">
+                                    <strong>⚛️ Atomik İşlemler:</strong> Kritik işlemler ya tamamen başarılı olur ya da hiç yapılmamış gibi kabul edilir.
+                                </div>
+                                
+                                <ul>
+                                    <li><strong>Transactional Dosya İşlemleri:</strong> Geçici dosyaya yazma, doğrulama, ardından atomik değişim.</li>
+                                    <li><strong>Crash Recovery:</strong> Elektrik kesintisi veya sistem çökmesi anında bile veri tutarlılığı korunur.</li>
+                                    <li><strong>ACID Özellikleri:</strong> Atomicity, Consistency, Isolation, Durability garantisi.</li>
+                                    <li><strong>Sync Guarantee:</strong> Verilerin disk'e yazıldığından emin olmak için fsync kullanılır.</li>
+                                </ul>
+                                
+                                <p><strong>Örnek Akış:</strong></p>
+                                <ol>
+                                    <li>Veri geçici dosyaya (.tmp) yazılır</li>
+                                    <li>Disk'e senkronizasyon yapılır (fsync)</li>
+                                    <li>Atomik olarak orijinal dosya ile değiştirilir (rename)</li>
+                                    <li>Hata durumunda geçici dosya silinir</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#stability3">
+                                Bağlantı kesintilerinde "orphan" pozisyonlar nasıl yönetiliyor?
+                            </button>
+                        </h2>
+                        <div id="stability3" class="accordion-collapse collapse" data-bs-parent="#stabilityAccordion">
+                            <div class="accordion-body">
+                                <p><span class="technical-term">Orphan Recovery</span> sistemi bağlantı kesintilerinde oluşan sahipsiz pozisyonları otomatik olarak yönetir:</p>
+                                
+                                <ul>
+                                    <li><strong>Hızlı Tespit:</strong> 5 saniye içinde bağlantı kopukluğu tespit edilir.</li>
+                                    <li><strong>Otomatik Senkronizasyon:</strong> Bağlantı geri geldiğinde pozisyon durumu otomatik olarak senkronize edilir.</li>
+                                    <li><strong>State Recovery:</strong> Çökme anındaki sistem durumu korunur ve geri yüklenebilir.</li>
+                                    <li><strong>Manual Override:</strong> Gerekirse manuel müdahale imkanı sunulur.</li>
+                                </ul>
+                                
+                                <div class="stability-highlight">
+                                    <strong>🛡️ %100 Kurtarma Başarısı:</strong> Bağlantı kesintilerinde pozisyon kaybı yaşanmaz.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kullanım & Strateji Kategorisi -->
+            <div class="faq-category">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h2 class="category-title">Kullanım & Strateji</h2>
+                </div>
+                
+                <div class="accordion" id="usageAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#usage1">
+                                Hangi zaman dilimlerini kullanmalıyım?
+                            </button>
+                        </h2>
+                        <div id="usage1" class="accordion-collapse collapse show" data-bs-parent="#usageAccordion">
+                            <div class="accordion-body">
+                                <p>Sentralyx <strong>Multi-Timeframe (MTF)</strong> analiz yeteneği sunar:</p>
+                                
+                                <ul>
+                                    <li><strong>Scalping (1m, 5m):</strong> Hızlı giriş/çıkışlar için uygun, ancak yüksek dikkat gerektirir.</li>
+                                    <li><strong>Intraday (15m, 1h):</strong> En dengeli yaklaşım, hem sinyal kalitesi hem de işlem frekansı açısından ideal.</li>
+                                    <li><strong>Swing (4h, 1d):</strong> Daha uzun vadeli stratejiler için, daha az stresli.</li>
+                                </ul>
+                                
+                                <p><strong>MTF Onay Sistemi:</strong> Birden fazla zaman dilimindeki sinyallerin uyumu, işlem kararının gücünü artırır.</p>
+                                
+                                <div class="stability-highlight">
+                                    <strong>📊 Öneri:</strong> Yeni başlayanlar için 15m ve 1h zaman dilimleri kombinasyonu tavsiye edilir.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#usage2">
+                                Risk yönetimi nasıl ayarlanmalı?
+                            </button>
+                        </h2>
+                        <div id="usage2" class="accordion-collapse collapse" data-bs-parent="#usageAccordion">
+                            <div class="accordion-body">
+                                <p>Profesyonel risk yönetimi için şu parametreleri öneriyoruz:</p>
+                                
+                                <ul>
+                                    <li><strong>Stop Loss:</strong> %1.5 - %3.0 (piyasa volatilitesine göre)</li>
+                                    <li><strong>Take Profit:</strong> %3.0 - %6.0 (Risk/Oran en az 1:2)</li>
+                                    <li><strong>Position Size:</strong> Toplam sermayenin %2-5'i</li>
+                                    <li><strong>Daily Loss Limit:</strong> Günlük maksimum %5 kayıp</li>
+                                    <li><strong>Max Duration:</strong> 240 dakika (4 saat)</li>
+                                </ul>
+                                
+                                <p><strong>Önemli Not:</strong> Asla tek bir işlemde toplam sermayenizin %10'undan fazla riske atmayın.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#usage3">
+                                Hangi indikatörler daha etkili?
+                            </button>
+                        </h2>
+                        <div id="usage3" class="accordion-collapse collapse" data-bs-parent="#usageAccordion">
+                            <div class="accordion-body">
+                                <p>Strateji tipinize göre farklı indikatör kombinasyonları etkili olabilir:</p>
+                                
+                                <p><strong>Trend Takibi:</strong></p>
+                                <ul>
+                                    <li>MACD (12, 26, 9) - Trend yönü ve momentum</li>
+                                    <li>Moving Averages (20, 50) - Destek/direnç seviyeleri</li>
+                                    <li>ADX - Trend gücü ölçümü</li>
+                                </ul>
+                                
+                                <p><strong>Mean Reversion:</strong></p>
+                                <ul>
+                                    <li>RSI (14) - Aşırı alım/satım bölgeleri</li>
+                                    <li>Bollinger Bands - Fiyat kanalları</li>
+                                    <li>Stochastic - Momentum osilatörü</li>
+                                </ul>
+                                
+                                <p><strong>Volume Analysis:</strong></p>
+                                <ul>
+                                    <li>Volume Profile - Fiyat/volume ilişkisi</li>
+                                    <li>On-Balance Volume - Akış yönü</li>
+                                </ul>
+                                
+                                <div class="stability-highlight">
+                                    <strong>💡 İpucu:</strong> İndikatörleri tek başına değil, birbirini doğrulayacak şekilde kullanın.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#usage4">
+                                Backtest nasıl yapılır?
+                            </button>
+                        </h2>
+                        <div id="usage4" class="accordion-collapse collapse" data-bs-parent="#usageAccordion">
+                            <div class="accordion-body">
+                                <p>Etkili bir backtest için şu adımları izleyin:</p>
+                                
+                                <ol>
+                                    <li><strong>Veri Hazırlığı:</strong> En az 6 aylık geçmiş veri kullanın.</li>
+                                    <li><strong>Strateji Tanımı:</strong> Giriş/çıkış kurallarını net bir şekilde belirleyin.</li>
+                                    <li><strong>Parametre Optimizasyonu:</strong> Farklı parametre setlerini test edin.</li>
+                                    <li><strong>Walk-Forward Test:</strong> Optimizasyon sonrası genişletilmiş periyotta test.</li>
+                                    <li><strong>Risk Analizi:</strong> Maximum drawdown ve sharpe ratio hesaplayın.</li>
+                                </ol>
+                                
+                                <p><strong>Performans Metrikleri:</strong></p>
+                                <ul>
+                                    <li>Win Rate: %60+ (ideal)</li>
+                                    <li>Profit Factor: 1.5+ (ideal)</li>
+                                    <li>Max Drawdown: %20 altı</li>
+                                    <li>Sharpe Ratio: 1.0+ (ideal)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="display-5 mb-4">Hâlâ sorunuz mu var?</h2>
+                <p class="lead text-secondary mb-4">
+                    Teknik destek ve daha fazla bilgi için Telegram'dan bize ulaşabilirsiniz.
+                </p>
+                <a href="https://t.me/sentralyx_bot" target="_blank" class="cta-button">
+                    <i class="fab fa-telegram-plane"></i>
+                    Telegram'dan Ulaşın
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        // Load header and footer
+        fetch('components/footer.html')
+            .then(async (response) => {
+                const buffer = await response.arrayBuffer();
+                return new TextDecoder('utf-8').decode(buffer);
+            })
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            })
+            .catch(error => console.error('Footer yuklenemedi:', error));
+    </script>
+</body>
+</html>
