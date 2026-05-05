@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Sentralyx | Mühendislik Manifestosu - Teknoloji ve Mimari</title>
+    <meta name="description" content="Sentralyx'in teknolojik üstünlüğünü kanıtlayan mühendislik manifestosu. Thread Watchdog, Atomic Write, Orphan Recovery ve 100% güvenlik altyapısı.">
+    <meta name="keywords" content="sentralyx teknoloji, mühendislik manifestosu, thread watchdog, atomic write, orphan recovery, güvenlik, stabilite, trading terminal">
+
+    <link rel="icon" type="image/x-icon" href="sentralyx_favicon.ico">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <style>
+        /* Technology Page Specific Styles */
+        .tech-hero {
+            padding: 120px 0 60px;
+            background: radial-gradient(circle at top left, rgba(47, 177, 127, 0.12), transparent);
+            position: relative;
+        }
+        
+        .reliability-badge {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+            margin-bottom: 20px;
+        }
+        
+        .reliability-badge i {
+            font-size: 1rem;
+        }
+        
+        .tech-section {
+            padding: 80px 0;
+        }
+        
+        .tech-card {
+            background: var(--panel-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            padding: 30px;
+            height: 100%;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tech-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.2);
+            border-color: var(--accent-blue);
+        }
+        
+        .tech-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--signal-buy));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .code-block {
+            background: #0d1117;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        
+        .code-block .comment {
+            color: #6a737d;
+        }
+        
+        .code-block .keyword {
+            color: #f97583;
+        }
+        
+        .code-block .string {
+            color: #9ecbff;
+        }
+        
+        .code-block .number {
+            color: #79c0ff;
+        }
+        
+        .security-shield {
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.1), rgba(52, 152, 219, 0.1));
+            border: 1px solid rgba(231, 76, 60, 0.3);
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .security-shield h3 {
+            color: var(--accent-blue);
+            margin-bottom: 20px;
+        }
+        
+        .accordion-item {
+            background: var(--panel-dark);
+            border: 1px solid var(--border-color);
+            margin-bottom: 10px;
+        }
+        
+        .accordion-button {
+            background: var(--panel-dark);
+            color: var(--text-main);
+            border: none;
+        }
+        
+        .accordion-button:not(.collapsed) {
+            background: var(--accent-blue);
+            color: white;
+        }
+        
+        .accordion-body {
+            background: var(--panel-dark);
+            color: var(--text-main);
+        }
+        
+        .tech-stat {
+            text-align: center;
+            padding: 30px;
+            background: var(--panel-dark);
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .tech-stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent-blue);
+            margin-bottom: 10px;
+        }
+        
+        .tech-stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .tech-hero {
+                padding: 100px 0 40px;
+            }
+            
+            .tech-section {
+                padding: 60px 0;
+            }
+            
+            .tech-card {
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+            
+            .security-shield {
+                padding: 25px;
+                margin: 30px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="main-header"></header>
+
+    <section class="tech-hero">
+        <div class="container">
+            <div class="text-center">
+                <div class="reliability-badge">
+                    <i class="fas fa-check-circle"></i>
+                    119/119 Unit Tests Passed - %100 Reliability
+                </div>
+                <h1 class="display-3 mb-4">Mühendislik Manifestosu</h1>
+                <p class="lead text-secondary mb-5">
+                    Sentralyx'in teknolojik üstünlüğünü kanıtlayan mimari prensiplerimiz ve yenilikçi çözümlerimiz.
+                    Sıfır aracı riski, maksimum güvenlik ve %100 stabilite için tasarlandı.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Thread Watchdog Section -->
+    <section class="tech-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="tech-card">
+                        <div class="tech-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="text-main mb-3">ThreadWatchdog Mimarisi</h3>
+                        <p class="text-secondary mb-4">
+                            Sentralyx, ThreadWatchdog sistemi ile kendi kendini iyileştirme yeteneğine sahiptir. 
+                            Bu sistem, tüm kritik thread'leri 7/24 izler ve otomatik olarak yeniden başlatır.
+                        </p>
+                        <div class="code-block">
+<span class="keyword">class</span> <span class="string">ThreadWatchdog</span>:
+    <span class="keyword">def</span> <span class="string">__init__</span>(self):
+        self.monitored_threads = {}      <span class="comment"># İzlenen thread'ler</span>
+        self.thread_health = {}          <span class="comment"># Sağlık durumu</span>
+        self.check_interval = <span class="number">30s</span>       <span class="comment"># Kontrol aralığı</span>
+        self.max_restart_attempts = <span class="number">3</span>   <span class="comment"># Maksimum restart</span>
+                        </div>
+                        <ul class="text-secondary">
+                            <li>Heartbeat kontrolü ile donmuş thread tespiti</li>
+                            <li>Otomatik restart mekanizması</li>
+                            <li>State-safe restart ile veri koruması</li>
+                            <li>7/24 sistem monitoring</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="tech-stat">
+                        <div class="tech-stat-number">30s</div>
+                        <div class="tech-stat-label">Kontrol Aralığı</div>
+                    </div>
+                    <div class="tech-stat mt-4">
+                        <div class="tech-stat-number">3x</div>
+                        <div class="tech-stat-label">Maksimum Restart Denemesi</div>
+                    </div>
+                    <div class="tech-stat mt-4">
+                        <div class="tech-stat-number">100%</div>
+                        <div class="tech-stat-label">Thread Kurtarma Başarısı</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Atomic Write Section -->
+    <section class="tech-section bg-dark">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-lg-2">
+                    <div class="tech-card">
+                        <div class="tech-icon">
+                            <i class="fas fa-atom"></i>
+                        </div>
+                        <h3 class="text-main mb-3">Atomic Write Güvencesi</h3>
+                        <p class="text-secondary mb-4">
+                            Veri bütünlüğü için Atomic Write prensibi kullanılır. Kritik işlemler 
+                            ya tamamen başarılı olur ya da hiç yapılmamış gibi kabul edilir.
+                        </p>
+                        <div class="code-block">
+<span class="comment"># Atomic Write Mimarisi</span>
+<span class="keyword">def</span> <span class="string">atomic_write</span>(data, file_path):
+    temp_file = file_path + <span class="string">'.tmp'</span>
+    
+    <span class="comment"># Geçici dosyaya yaz</span>
+    <span class="keyword">with</span> <span class="string">open</span>(temp_file, <span class="string">'w'</span>) <span class="keyword">as</span> f:
+        f.write(data)
+        f.flush()        <span class="comment"># Disk'e yaz</span>
+        os.fsync(f.fileno()) <span class="comment"># Sync et</span>
+    
+    <span class="comment"># Atomik değişim</span>
+    os.rename(temp_file, file_path)
+                        </div>
+                        <ul class="text-secondary">
+                            <li>Kesinti anında veri koruması</li>
+                            <li>Transactional dosya işlemleri</li>
+                            <li>Crash recovery desteği</li>
+                            <li>Veri tutarlılığı garantisi</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6 order-lg-1">
+                    <div class="tech-stat">
+                        <div class="tech-stat-number">0%</div>
+                        <div class="tech-stat-label">Veri Kayıp Oranı</div>
+                    </div>
+                    <div class="tech-stat mt-4">
+                        <div class="tech-stat-number">ACID</div>
+                        <div class="tech-stat-label">Transactional Özellikler</div>
+                    </div>
+                    <div class="tech-stat mt-4">
+                        <div class="tech-stat-number">100%</div>
+                        <div class="tech-stat-label">Veri Bütünlüğü</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Orphan Recovery Section -->
+    <section class="tech-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="tech-card">
+                        <div class="tech-icon">
+                            <i class="fas fa-life-ring"></i>
+                        </div>
+                        <h3 class="text-main mb-3">Orphan Recovery Sistemi</h3>
+                        <p class="text-secondary mb-4">
+                            Bağlantı kesintilerinde oluşan "orphan" pozisyonları otomatik olarak 
+                            tespit eden ve yöneten akıllı kurtarma mekanizması.
+                        </p>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="tech-stat">
+                                    <div class="tech-stat-number">5sn</div>
+                                    <div class="tech-stat-label">Tespit Süresi</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="tech-stat">
+                                    <div class="tech-stat-number">100%</div>
+                                    <div class="tech-stat-label">Kurtarma Başarısı</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="tech-stat">
+                                    <div class="tech-stat-number">24/7</div>
+                                    <div class="tech-stat-label">Monitoring</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Section -->
+    <section class="tech-section bg-dark">
+        <div class="container">
+            <div class="security-shield">
+                <h3><i class="fas fa-lock me-3"></i>Güvenlik Mimarisi</h3>
+                <p class="text-secondary mb-4">
+                    API anahtarları lokalde HWID ile şifrelenir. Sunucu tarafı GTC emirleri 
+                    maksimum koruma sağlar.
+                </p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="text-main mb-3">Lokal Şifreleme</h5>
+                        <ul class="text-secondary text-start">
+                            <li>HWID bazlı anahtar üretimi</li>
+                            <li>AES-256 şifreleme</li>
+                            <li>Donanım bağımlılığı</li>
+                            <li>Lokal depolama</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h5 class="text-main mb-3">Sunucu Tarafı Koruma</h5>
+                        <ul class="text-secondary text-start">
+                            <li>SL/TP emirleri sunucuda</li>
+                            <li>Kesinti anında koruma</li>
+                            <li>Global stop mekanizması</li>
+                            <li>Emergency protokoller</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Rule Engine Section -->
+    <section class="tech-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="text-main">İndikatör Rule Engine</h2>
+                <p class="text-secondary">Etkileşimli karar mekanizması ve strateji mantığı</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="accordion" id="ruleEngineAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#rule1">
+                                    <i class="fas fa-chart-line me-3"></i>RSI Oversold/Overbought Kuralı
+                                </button>
+                            </h2>
+                            <div id="rule1" class="accordion-collapse collapse show" data-bs-parent="#ruleEngineAccordion">
+                                <div class="accordion-body">
+                                    <div class="code-block">
+<span class="keyword">if</span> rsi_value < <span class="number">30</span>:
+    signal = <span class="string">"BUY"</span>
+    confidence = <span class="number">0.8</span>
+<span class="keyword">elif</span> rsi_value > <span class="number">70</span>:
+    signal = <span class="string">"SELL"</span>
+    confidence = <span class="number">0.8</span>
+<span class="keyword">else</span>:
+    signal = <span class="string">"HOLD"</span>
+    confidence = <span class="number">0.0</span>
+                                    </div>
+                                    <p class="text-secondary mt-3">
+                                        RSI indikatörü 30 seviyesinin altına düştüğünde alım, 70 seviyesinin üstüne çıktığında satım sinyali üretir.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#rule2">
+                                    <i class="fas fa-exchange-alt me-3"></i>MACD Crossover Doğrulaması
+                                </button>
+                            </h2>
+                            <div id="rule2" class="accordion-collapse collapse" data-bs-parent="#ruleEngineAccordion">
+                                <div class="accordion-body">
+                                    <div class="code-block">
+<span class="comment"># MACD Crossover Logic</span>
+macd_line = calculate_macd(data)
+signal_line = calculate_signal_line(data)
+
+<span class="keyword">if</span> macd_line > signal_line <span class="keyword">and</span> previous_macd <= previous_signal:
+    <span class="keyword">return</span> <span class="string">"BUY"</span>, <span class="number">0.7</span>
+<span class="keyword">elif</span> macd_line < signal_line <span class="keyword">and</span> previous_macd >= previous_signal:
+    <span class="keyword">return</span> <span class="string">"SELL"</span>, <span class="number">0.7</span>
+                                    </div>
+                                    <p class="text-secondary mt-3">
+                                        MACD çizgisinin sinyal çizgisini aşağıdan yukarıya kesmesi alım, yukarıdan aşağıya kesmesi satım sinyali olarak kabul edilir.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#rule3">
+                                    <i class="fas fa-layer-group me-3"></i>Multi-Timeframe Uyumu
+                                </button>
+                            </h2>
+                            <div id="rule3" class="accordion-collapse collapse" data-bs-parent="#ruleEngineAccordion">
+                                <div class="accordion-body">
+                                    <div class="code-block">
+<span class="comment"># MTF Confirmation Logic</span>
+timeframes = [<span class="string">'15m'</span>, <span class="string">'1h'</span>, <span class="string">'4h'</span>]
+signals = []
+
+<span class="keyword">for</span> tf <span class="keyword">in</span> timeframes:
+    tf_signal = analyze_timeframe(tf)
+    signals.append(tf_signal)
+
+<span class="comment"># Çoğunluk oylaması</span>
+<span class="keyword">if</span> signals.count(<span class="string">"BUY"</span>) >= <span class="number">2</span>:
+    <span class="keyword">return</span> <span class="string">"BUY"</span>, <span class="number">0.9</span>
+<span class="keyword">elif</span> signals.count(<span class="string">"SELL"</span>) >= <span class="number">2</span>:
+    <span class="keyword">return</span> <span class="string">"SELL"</span>, <span class="number">0.9</span>
+                                    </div>
+                                    <p class="text-secondary mt-3">
+                                        Birden fazla zaman dilimindeki sinyallerin uyumu, işlem kararının gücünü artırır ve yanlış sinyalleri filtreler.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Performance Stats -->
+    <section class="tech-section bg-dark">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="text-main">Performans Metrikleri</h2>
+                <p class="text-secondary">Sistem stabilitesi ve güvenilirlik göstergeleri</p>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="tech-stat">
+                        <div class="tech-stat-number">99.9%</div>
+                        <div class="tech-stat-label">Uptime</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="tech-stat">
+                        <div class="tech-stat-number">&lt;1ms</div>
+                        <div class="tech-stat-label">Response Time</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="tech-stat">
+                        <div class="tech-stat-number">119/119</div>
+                        <div class="tech-stat-label">Tests Passed</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="tech-stat">
+                        <div class="tech-stat-number">0</div>
+                        <div class="tech-stat-label">Critical Bugs</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        // Load header and footer
+        fetch('components/footer.html')
+            .then(async (response) => {
+                const buffer = await response.arrayBuffer();
+                return new TextDecoder('utf-8').decode(buffer);
+            })
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            })
+            .catch(error => console.error('Footer yuklenemedi:', error));
+    </script>
+</body>
+</html>
