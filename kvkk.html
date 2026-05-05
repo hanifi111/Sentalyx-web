@@ -240,6 +240,13 @@
                     Aşağıdaki sınırlı veriler, sistemin çalışması için teknik zorunluluk gereği işlenmektedir:
                 </p>
                 
+                <div class="info-box">
+                    <p class="mb-0">
+                        <i class="fas fa-shield-alt me-2 text-accent-blue"></i>
+                        <strong>Önemli Not:</strong> Sentralyx, kullanıcının işlem güvenliği için oluşturulan logları ve bağlantı verilerini asla merkezi bir sunucuya iletmez; tüm teknik kayıtlar sadece kullanıcının kendi makinesinde saklanır.
+                    </p>
+                </div>
+                
                 <div class="data-table">
                     <table class="table">
                         <thead>
@@ -265,16 +272,6 @@
                                 <td>Güncelleme duyuruları ve lisans bilgilendirmeleri</td>
                                 <td>Açık rıza (KVKK m.5/1)</td>
                             </tr>
-                            <tr>
-                                <td><strong>IP Adresi</strong></td>
-                                <td>Güvenlik, API rate-limit yönetimi ve sahtecilik önleme</td>
-                                <td>Meşru menfaat (KVKK m.5/2-f)</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Log Kayıtları</strong></td>
-                                <td>Sistem hatalarının ayıklanması ve stabilite takibi</td>
-                                <td>Meşru menfaat (KVKK m.5/2-f)</td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -296,6 +293,11 @@
                         <strong>ASLA</strong> kendi sunucularına göndermez ve 3. şahıslarla paylaşmaz. 
                         Bu veriler, tamamen kullanıcının yerel makinesinde Fernet ve HWID tabanlı şifreleme ile 
                         saklanır ve veri sorumlusunun bu verilere erişimi yoktur.
+                    </p>
+                    <p class="mb-0 mt-3">
+                        <i class="fas fa-atom me-2"></i>
+                        Verileriniz <span class="technical-term">Atomic Write</span> işlemiyle sadece sizin diskinizde güvenle saklanır, 
+                        <span class="technical-term">Thread Watchdog</span> sistemi ise bu verilerin bütünlüğünü 7/24 korur.
                     </p>
                 </div>
                 
